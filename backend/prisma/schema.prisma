@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ata {
+  id                String      @id @default(cuid())
+  nup               String      @unique
+  modalidade        String      // MOD/Nº (ex: "CC 001/2025 ou PE 001/2025")
+  arpNumero         String?     // ARP Nº (formato 001/2025) - Opcional
+  orgaoGerenciador  String      // Órgão (sigla do órgão)
+  objeto            String      // Descrição do objeto
+  vigenciaFinal     DateTime?   // Data final da vigência - Opcional
+  valorTotal        Decimal     // Valor homologado em R$
+  valorAdesao       Decimal     // Limite global: VALOR_TOTAL * 2 (200%) - Lei 14.133/2021
+  saldoDisponivel   Decimal     // VALOR_ADESAO - soma de todas as adesões
+  ativa             Boolean     @default(true)
+  
+  adesoes           Adesao[]
+  
+  criadoEm          DateTime    @default(now())
+  atualizadoEm      DateTime    @updatedAt
+
+  @@index([orgaoGerenciador])
+  @@index([vigenciaFinal])
+  @@index([ativa])
+}
+
+model Adesao {
+  id                String      @id @default(cuid())
+  ataId             String
+  ata               Ata         @relation(fields: [ataId], references: [id], onDelete: Cascade)
+  
+  numeroIdentificador String    // ID da adesão
+  data              DateTime    @default(now())
+  orgaoAderente     String      // Sigla do órgão aderente
+  valorAderido      Decimal     
+  
+  criadoEm          DateTime    @default(now())
+  atualizadoEm      DateTime    @updatedAt
+
+  @@unique([ataId, numeroIdentificador])
+  @@index([ataId])
+  @@index([orgaoAderente])
+  @@index([data])
+}
