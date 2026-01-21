@@ -4,8 +4,10 @@ import { Adesao } from '../types';
 import { formatCurrency, formatDate } from '../utils/format';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import { FormAdesao } from '../components/FormAdesao';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Adesoes() {
+  const { isAdmin } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [adesoes, setAdesoes] = useState<Adesao[]>([]);
@@ -130,13 +132,15 @@ export default function Adesoes() {
                       >
                         <Edit size={14} />
                       </button>
-                      <button
-                        className="btn btn-danger btn-xs"
-                        onClick={() => handleDelete(adesao.id)}
-                        title="Deletar"
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      {isAdmin() && (
+                        <button
+                          className="btn btn-danger btn-xs"
+                          onClick={() => handleDelete(adesao.id)}
+                          title="Deletar"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

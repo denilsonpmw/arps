@@ -3,10 +3,13 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { errorHandler } from './middleware/errorHandler';
 import { prisma } from './lib/prisma';
+import authRoutes from './routes/authRoutes';
 import ataRoutes from './routes/ataRoutes';
 import adesaoRoutes from './routes/adesaoRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
 import importRoutes from './routes/importRoutes';
+import userRoutes from './routes/userRoutes';
+import { authMiddleware } from './middleware/auth';
 
 dotenv.config();
 
@@ -23,11 +26,15 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Routes
-app.use('/api/atas', ataRoutes);
-app.use('/api/adesoes', adesaoRoutes);
-app.use('/api/dashboard', dashboardRoutes);
-app.use('/api/import', importRoutes);
+// Rotas públicas (sem autenticação)
+app.use('/api/auth', authRoutes);
+
+// Rotas protegidas (com autenticação)
+app.use('/api/atas', authMiddleware, ataRoutes);
+app.use('/api/adesoes', authMiddleware, adesaoRoutes);
+app.use('/api/dashboard', authMiddleware, dashboardRoutes);
+app.use('/api/import', authMiddleware, importRoutes);
+app.use('/api/users', userRoutes); // já tem authMiddleware e adminMiddleware internamente
 
 // 404 handler
 app.use((req, res) => {
@@ -55,3 +62,6 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+
+// Exportar prisma para uso nos controllers
+export { prisma };

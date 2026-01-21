@@ -72,8 +72,17 @@ export class AtaService {
   }
 
   static async delete(id: string) {
-    const ata = await prisma.ata.findUnique({ where: { id } });
+    const ata = await prisma.ata.findUnique({ 
+      where: { id },
+      include: { adesoes: true }
+    });
+    
     if (!ata) throw new Error('Ata não encontrada');
+
+    // Verificar se há adesões cadastradas
+    if (ata.adesoes && ata.adesoes.length > 0) {
+      throw new Error(`Não é possível excluir esta ata pois ela possui ${ata.adesoes.length} adesão(ões) cadastrada(s)`);
+    }
 
     return prisma.ata.delete({ where: { id } });
   }

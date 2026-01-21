@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-const API_URL = import.meta.env?.VITE_API_URL || 'http://localhost:3001';
+import api from './api';
 
 export interface ProcessoRP {
   nup: string;
@@ -34,7 +32,7 @@ export const importService = {
    * Gera preview da importação sem executá-la
    */
   async preview(data: { data: ProcessoRP[] }): Promise<ImportPreview> {
-    const response = await axios.post(`${API_URL}/api/import/preview`, data);
+    const response = await api.post('/import/preview', data);
     return response.data.data;
   },
 
@@ -42,7 +40,7 @@ export const importService = {
    * Executa a importação dos processos
    */
   async executar(data: { data: ProcessoRP[] }): Promise<ImportResult> {
-    const response = await axios.post(`${API_URL}/api/import/executar`, data);
+    const response = await api.post('/import/executar', data);
     return response.data.data;
   },
 };

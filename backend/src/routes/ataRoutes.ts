@@ -8,11 +8,12 @@ import {
   buscarAtaParaRelatorio,
 } from '../controllers/ataController';
 import { AtaService } from '../services/ataService';
+import { adminMiddleware } from '../middleware/adminMiddleware';
 
 const router = express.Router();
 
 // Bulk operations (must come before /:id routes)
-router.delete('/bulk', async (req, res) => {
+router.delete('/bulk', adminMiddleware, async (req, res) => {
   try {
     const { ids } = req.body;
 
@@ -63,6 +64,6 @@ router.get('/', listAtas);
 router.get('/relatorio/buscar', buscarAtaParaRelatorio);
 router.get('/:id', getAta);
 router.patch('/:id', updateAta);
-router.delete('/:id', deleteAta);
+router.delete('/:id', adminMiddleware, deleteAta);
 
 export default router;

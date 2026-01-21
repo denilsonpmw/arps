@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Menu, Home, FileText, CheckSquare, BarChart3, X } from 'lucide-react';
+import { Menu, Home, FileText, CheckSquare, BarChart3, X, LogOut, Users } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
-type PageType = 'dashboard' | 'atas' | 'adesoes' | 'relatorios' | 'ata-detail';
+type PageType = 'dashboard' | 'atas' | 'adesoes' | 'relatorios' | 'usuarios' | 'ata-detail';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,12 +12,14 @@ interface LayoutProps {
 
 export default function Layout({ children, currentPage, onPageChange }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { logout, user, isAdmin } = useAuth();
 
   const navItems = [
     { id: 'dashboard' as PageType, label: 'Dashboard', icon: Home },
     { id: 'atas' as PageType, label: 'Atas', icon: FileText },
     { id: 'adesoes' as PageType, label: 'Adesões', icon: CheckSquare },
     { id: 'relatorios' as PageType, label: 'Relatórios', icon: BarChart3 },
+    ...(isAdmin() ? [{ id: 'usuarios' as PageType, label: 'Usuários', icon: Users }] : []),
   ];
 
   return (
@@ -54,15 +57,33 @@ export default function Layout({ children, currentPage, onPageChange }: LayoutPr
               {sidebarOpen && <span className="truncate">{item.label}</span>}
             </button>
           ))}
+          
+          {/* Logout */}
+          <button
+            onClick={logout}
+            className="w-full flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 transition-colors text-xs sm:text-base hover:bg-red-700 mt-auto border-t border-blue-800"
+            title="Sair"
+          >
+            <LogOut size={18} />
+            {sidebarOpen && <span className="truncate">Sair</span>}
+          </button>
         </nav>
       </aside>
 
       {/* Main Content */}
       <main className={`${sidebarOpen ? 'ml-64' : 'ml-16 sm:ml-20'} flex-1 transition-all duration-300`}>
         <header className="bg-white shadow">
-          <div className="px-3 sm:px-6 py-3 sm:py-4">
-            <h2 className="text-lg sm:text-2xl font-bold text-gray-900">ARPS-SUPEL</h2>
-            <p className="text-xs sm:text-sm text-gray-600 truncate">Sistema de Controle de Adesões</p>
+          <div className="px-3 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+            <div>
+              <h2 className="text-lg sm:text-2xl font-bold text-gray-900">ARPS-SUPEL</h2>
+              <p className="text-xs sm:text-sm text-gray-600 truncate">Sistema de Controle de Adesões</p>
+            </div>
+            {user && (
+              <div className="text-right hidden sm:block">
+                <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                <p className="text-xs text-gray-600">{user.email}</p>
+              </div>
+            )}
           </div>
         </header>
 

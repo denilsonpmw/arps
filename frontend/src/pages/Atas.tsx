@@ -5,8 +5,10 @@ import { formatCurrency, formatDate, isSaldoCritico } from '../utils/format';
 import { Plus, Edit, Trash2, Upload, Trash } from 'lucide-react';
 import { FormAta } from '../components/FormAta';
 import { ImportModal } from '../components/ImportModal';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Atas() {
+  const { isAdmin } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [atas, setAtas] = useState<Ata[]>([]);
@@ -57,8 +59,9 @@ export default function Atas() {
       try {
         await atasService.delete(id);
         loadAtas();
-      } catch (err) {
-        alert('Erro ao deletar ata');
+      } catch (err: any) {
+        const errorMessage = err.response?.data?.error?.message || err.message || 'Erro ao deletar ata';
+        alert(errorMessage);
       }
     }
   };
@@ -71,13 +74,17 @@ export default function Atas() {
         const result = await atasService.bulkDelete(Array.from(selectedIds));
         
         if (result.erros.length > 0) {
-          alert(`${result.deletados} ata(s) deletada(s). ${result.erros.length} erro(s).`);
+          const errosMensagens = result.erros.map(e => `- ID ${e.id.substring(0, 8)}: ${e.erro}`).join('\n');
+          alert(`${result.deletados} ata(s) deletada(s). ${result.erros.length} erro(s):\n\n${errosMensagens}`);
+        } else {
+          alert(`${result.deletados} ata(s) deletada(s) com sucesso!`);
         }
         
         setSelectedIds(new Set());
         loadAtas();
-      } catch (err) {
-        alert('Erro ao deletar atas');
+      } catch (err: any) {
+        const errorMessage = err.response?.data?.error?.message || err.message || 'Erro ao deletar atas';
+        alert(errorMessage);
       }
     }
   };
@@ -118,7 +125,7 @@ export default function Atas() {
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Atas de Registro de Preços</h2>
         <div className="flex gap-2">
-          {selectedIds.size > 0 && (
+          {isAdmin() && selectedIds.size > 0 && (
             <button 
               className="btn btn-danger flex items-center gap-2" 
               onClick={handleBulkDelete}
@@ -165,14 +172,16 @@ export default function Atas() {
           <table className="table table-compact w-full text-[11px] sm:text-xs whitespace-nowrap">
             <thead>
               <tr className="bg-gray-100">
-                <th className="text-center px-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedIds.size === atas.length && atas.length > 0}
-                    onChange={toggleSelectAll}
-                    className="cursor-pointer"
-                  />
-                </th>
+                {isAdmin() && (
+                  <th className="text-center px-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.size === atas.length && atas.length > 0}
+                      onChange={toggleSelectAll}
+                      className="cursor-pointer"
+                    />
+                  </th>
+                )}
                 <th className="text-left px-2">NUP</th>
                 <th className="text-left px-2">MOD/Nº</th>
                 <th className="text-left px-2">ARP Nº</th>
@@ -189,14 +198,16 @@ export default function Atas() {
             <tbody>
               {atas.map((ata) => (
                 <tr key={ata.id} className="border-b hover:bg-gray-50">
-                  <td className="text-center px-2">
-                    <input
-                      type="checkbox"
-                      checked={selectedIds.has(ata.id)}
-                      onChange={() => toggleSelect(ata.id)}
-                      className="cursor-pointer"
-                    />
-                  </td>
+                  {isAdmin() && (
+                    <td className="text-center px-2">
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.has(ata.id)}
+                        onChange={() => toggleSelect(ata.id)}
+                        className="cursor-pointer"
+                      />
+                    </td>
+                  )}
                   <td className="font-mono px-2">{ata.nup}</td>
                   <td className="font-mono px-2">{ata.modalidade}</td>
                   <td className="font-mono px-2">{ata.arpNumero}</td>
@@ -226,13 +237,15 @@ export default function Atas() {
                       >
                         <Edit size={14} />
                       </button>
-                      <button
-                        className="btn btn-danger btn-xs"
-                        onClick={() => handleDelete(ata.id)}
-                        title="Deletar"
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      {isAdmin() && (
+                        <button
+                          className="btn btn-danger btn-xs"
+                          onClick={() => handleDelete(ata.id)}
+                          title="Deletar"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>
