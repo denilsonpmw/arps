@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { atasService } from '../services/api';
 import { Ata } from '../types';
 import { formatCurrency, formatDate, isSaldoCritico } from '../utils/format';
-import { Plus, Edit, Trash2, Upload, Trash } from 'lucide-react';
+import { Plus, Edit, Trash2, Upload, Trash, Search, X } from 'lucide-react';
 import { FormAta } from '../components/FormAta';
 import { ImportModal } from '../components/ImportModal';
 import { useAuth } from '../contexts/AuthContext';
@@ -17,6 +17,14 @@ export default function Atas() {
   const [editingAta, setEditingAta] = useState<Ata | undefined>();
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  
+  // Filtros
+  const [filtros, setFiltros] = useState({
+    busca: '',
+    dataInicio: '',
+    dataFim: ''
+  });
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
   useEffect(() => {
     loadAtas();
@@ -112,6 +120,43 @@ export default function Atas() {
     setIsFormOpen(true);
   };
 
+  // Filtrar atas
+  const atasFiltradas = useMemo(() => {
+    return atas.filter(ata => {
+      // Filtro de busca por texto
+      if (filtros.busca) {
+        const busca = filtros.busca.toLowerCase();
+        const matches = 
+          ata.nup.toLowerCase().includes(busca) ||
+          ata.modalidade.toLowerCase().includes(busca) ||
+          (ata.arpNumero && ata.arpNumero.toLowerCase().includes(busca)) ||
+          ata.orgaoGerenciador.toLowerCase().includes(busca) ||
+          ata.objeto.toLowerCase().includes(busca);
+        
+        if (!matches) return false;
+      }
+
+      // Filtro de data de vigência
+      if (filtros.dataInicio) {
+        const vigencia = new Date(ata.vigenciaFinal);
+        const inicio = new Date(filtros.dataInicio);
+        if (vigencia < inicio) return false;
+      }
+
+      if (filtros.dataFim) {
+        const vigencia = new Date(ata.vigenciaFinal);
+        const fim = new Date(filtros.dataFim);
+        if (vigencia > fim) return false;
+      }
+
+      return true;
+    });
+  }, [atas, filtros]);
+
+  const limparFiltros = () => {
+    setFiltros({ busca: '', dataInicio: '', dataFim: '' });
+  };
+
   if (loading) {
     return <div className="text-center py-12">Carregando...</div>;
   }
@@ -134,6 +179,95 @@ export default function Atas() {
               Excluir ({selectedIds.size})
             </button>
           )}
+          <button 
+            className="btn btn-secondary flex items-center gap-2" 
+            onClick={() => setMostrarFiltros(!mostrarFiltros)}
+          >
+            <Search size={20} />
+            Filtros
+          </button>
+          <button 
+            className="btn btn-secondary flex items-center gap-2" 
+            onClick={() => setIsImportOpen(true)}
+          >
+            <Upload size={20} />
+            Importar
+          </button>
+          <button 
+            className="btn btn-primary flex items-center gap-2" 
+            onClick={() => openForm()}
+          >
+            <Plus size={20} />
+            Nova Ata
+          </button>
+        </div>
+      </div>
+
+      {/* Painel de Filtros */}
+      {mostrarFiltros && (
+        <div className="card">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold">Filtros de Busca</h3>
+            <button
+              onClick={() => setMostrarFiltros(false)}
+              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            >
+              <X size={20} />
+            </button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Buscar por NUP, Modalidade, ARP, Órgão ou Objeto
+              </label>
+              <input
+                type="text"
+                className="input"
+                placeholder="Digite para buscar..."
+                value={filtros.busca}
+                onChange={(e) => setFiltros({ ...filtros, busca: e.target.value })}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Vigência - Data Início
+              </label>
+              <input
+                type="date"
+                className="input"
+                value={filtros.dataInicio}
+                onChange={(e) => setFiltros({ ...filtros, dataInicio: e.target.value })}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Vigência - Data Fim
+              </label>
+              <input
+                type="date"
+                className="input"
+                value={filtros.dataFim}
+                onChange={(e) => setFiltros({ ...filtros, dataFim: e.target.value })}
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-2 mt-4">
+            <button
+              onClick={limparFiltros}
+              className="btn btn-secondary btn-sm"
+            >
+              Limpar Filtros
+            </button>
+            <span className="text-sm text-gray-600 dark:text-gray-400 flex items-center">
+              {atasFiltradas.length} de {atas.length} ata(s) encontrada(s)
+            </span>
+          </div>
+        </div>
+      )}
           <button 
             className="btn btn-secondary flex items-center gap-2" 
             onClick={() => setIsImportOpen(true)}
@@ -165,18 +299,20 @@ export default function Atas() {
         onSuccess={loadAtas}
       />
 
-      {atas.length === 0 ? (
-        <div className="card text-center py-8 text-gray-500">Nenhuma ata cadastrada</div>
+      {atasFiltradas.length === 0 ? (
+        <div className="card text-center py-8 text-gray-500 dark:text-gray-400">
+          {atas.length === 0 ? 'Nenhuma ata cadastrada' : 'Nenhuma ata encontrada com os filtros aplicados'}
+        </div>
       ) : (
         <div className="w-full">
           <table className="table table-compact w-full text-xs">
             <thead>
-              <tr className="bg-gray-100">
+              <tr className="bg-gray-100 dark:bg-gray-700">
                 {isAdmin() && (
                   <th className="text-center px-0.5 w-8">
                     <input
                       type="checkbox"
-                      checked={selectedIds.size === atas.length && atas.length > 0}
+                      checked={selectedIds.size === atasFiltradas.length && atasFiltradas.length > 0}
                       onChange={toggleSelectAll}
                       className="cursor-pointer"
                     />
@@ -196,8 +332,8 @@ export default function Atas() {
               </tr>
             </thead>
             <tbody>
-              {atas.map((ata) => (
-                <tr key={ata.id} className="border-b hover:bg-gray-50">
+              {atasFiltradas.map((ata) => (
+                <tr key={ata.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-800/50">
                   {isAdmin() && (
                     <td className="text-center px-0.5">
                       <input
