@@ -168,12 +168,12 @@ export default function Atas() {
       {atas.length === 0 ? (
         <div className="card text-center py-8 text-gray-500">Nenhuma ata cadastrada</div>
       ) : (
-        <div className="overflow-x-auto -mx-4 sm:-mx-0">
-          <table className="table table-compact w-full text-[11px] sm:text-xs whitespace-nowrap">
+        <div className="w-full">
+          <table className="table table-compact w-full text-[10px]">
             <thead>
               <tr className="bg-gray-100">
                 {isAdmin() && (
-                  <th className="text-center px-2">
+                  <th className="text-center px-1 w-8">
                     <input
                       type="checkbox"
                       checked={selectedIds.size === atas.length && atas.length > 0}
@@ -182,24 +182,24 @@ export default function Atas() {
                     />
                   </th>
                 )}
-                <th className="text-left px-2">NUP</th>
-                <th className="text-left px-2">MOD/Nº</th>
-                <th className="text-left px-2">ARP Nº</th>
-                <th className="text-left px-2">Órgão</th>
-                <th className="text-left px-2">Objeto</th>
-                <th className="text-left px-2">Vigência</th>
-                <th className="text-right px-2">Valor Total</th>
-                <th className="text-right px-2">Limite Adesão</th>
-                <th className="text-right px-2">Aderido</th>
-                <th className="text-right px-2">Saldo</th>
-                <th className="text-center px-2">Ações</th>
+                <th className="text-left px-1 w-24">NUP</th>
+                <th className="text-left px-1 w-20">MOD/Nº</th>
+                <th className="text-left px-1 w-16">ARP</th>
+                <th className="text-left px-1 w-24">Órgão</th>
+                <th className="text-left px-1">Objeto</th>
+                <th className="text-left px-1 w-20">Vigência</th>
+                <th className="text-right px-1 w-24">Valor Total</th>
+                <th className="text-right px-1 w-24">Lim. Adesão</th>
+                <th className="text-right px-1 w-24">Aderido</th>
+                <th className="text-right px-1 w-24">Saldo</th>
+                <th className="text-center px-1 w-16">Ações</th>
               </tr>
             </thead>
             <tbody>
               {atas.map((ata) => (
                 <tr key={ata.id} className="border-b hover:bg-gray-50">
                   {isAdmin() && (
-                    <td className="text-center px-2">
+                    <td className="text-center px-1">
                       <input
                         type="checkbox"
                         checked={selectedIds.has(ata.id)}
@@ -208,16 +208,16 @@ export default function Atas() {
                       />
                     </td>
                   )}
-                  <td className="font-mono px-2">{ata.nup}</td>
-                  <td className="font-mono px-2">{ata.modalidade}</td>
-                  <td className="font-mono px-2">{ata.arpNumero}</td>
-                  <td className="font-mono px-2">{ata.orgaoGerenciador}</td>
-                  <td className="px-2">{ata.objeto}</td>
-                  <td className="font-mono px-2">{formatDate(ata.vigenciaFinal)}</td>
-                  <td className="text-right font-mono px-2">{formatCurrency(ata.valorTotal)}</td>
-                  <td className="text-right font-mono px-2">{formatCurrency(ata.valorAdesao)}</td>
-                  <td className="text-right font-mono px-2">{formatCurrency(ata.totalAderido)}</td>
-                  <td className="text-right font-mono px-2">
+                  <td className="font-mono px-1 truncate" title={ata.nup}>{ata.nup}</td>
+                  <td className="font-mono px-1 truncate" title={ata.modalidade}>{ata.modalidade}</td>
+                  <td className="font-mono px-1 truncate" title={ata.arpNumero}>{ata.arpNumero}</td>
+                  <td className="font-mono px-1 truncate" title={ata.orgaoGerenciador}>{ata.orgaoGerenciador}</td>
+                  <td className="px-1 truncate max-w-xs" title={ata.objeto}>{ata.objeto}</td>
+                  <td className="font-mono px-1">{formatDate(ata.vigenciaFinal)}</td>
+                  <td className="text-right font-mono px-1">{formatCurrency(ata.valorTotal)}</td>
+                  <td className="text-right font-mono px-1">{formatCurrency(ata.valorAdesao)}</td>
+                  <td className="text-right font-mono px-1">{formatCurrency(ata.totalAderido)}</td>
+                  <td className="text-right font-mono px-1">
                     <span
                       className={
                         isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao)
@@ -228,22 +228,22 @@ export default function Atas() {
                       {formatCurrency(ata.saldoDisponivel)}
                     </span>
                   </td>
-                  <td className="text-center px-2">
+                  <td className="text-center px-1">
                     <div className="flex gap-1 justify-center">
                       <button 
-                        className="btn btn-secondary btn-xs" 
+                        className="btn btn-secondary btn-xs p-1" 
                         title="Editar"
                         onClick={() => openForm(ata)}
                       >
-                        <Edit size={14} />
+                        <Edit size={12} />
                       </button>
                       {isAdmin() && (
                         <button
-                          className="btn btn-danger btn-xs"
+                          className="btn btn-danger btn-xs p-1"
                           onClick={() => handleDelete(ata.id)}
                           title="Deletar"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={12} />
                         </button>
                       )}
                     </div>

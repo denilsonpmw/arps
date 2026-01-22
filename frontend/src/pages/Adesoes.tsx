@@ -99,46 +99,46 @@ export default function Adesoes() {
       {adesoes.length === 0 ? (
         <div className="card text-center py-8 text-gray-500">Nenhuma adesão cadastrada</div>
       ) : (
-        <div className="overflow-x-auto -mx-4 sm:-mx-0">
-          <table className="table table-compact w-full text-[11px] sm:text-xs whitespace-nowrap">
+        <div className="w-full">
+          <table className="table table-compact w-full text-[10px]">
             <thead>
               <tr className="bg-gray-100">
-                <th className="text-left px-2">NUP</th>
-                <th className="text-left px-2">MOD/Nº</th>
-                <th className="text-left px-2">Objeto</th>
-                <th className="text-left px-2">ID Adesão</th>
-                <th className="text-left px-2">Órgão Aderente</th>
-                <th className="text-left px-2">Data</th>
-                <th className="text-right px-2">Valor Aderido</th>
-                <th className="text-center px-2">Ações</th>
+                <th className="text-left px-1 w-24">NUP</th>
+                <th className="text-left px-1 w-20">MOD/Nº</th>
+                <th className="text-left px-1">Objeto</th>
+                <th className="text-left px-1 w-24">ID Adesão</th>
+                <th className="text-left px-1 w-32">Órgão Aderente</th>
+                <th className="text-left px-1 w-20">Data</th>
+                <th className="text-right px-1 w-24">Valor Aderido</th>
+                <th className="text-center px-1 w-16">Ações</th>
               </tr>
             </thead>
             <tbody>
               {adesoes.map((adesao) => (
                 <tr key={adesao.id} className="border-b hover:bg-gray-50">
-                  <td className="font-mono px-2">{adesao.ata.nup}</td>
-                  <td className="font-mono px-2">{adesao.ata.modalidade}</td>
-                  <td className="px-2">{adesao.ata.objeto}</td>
-                  <td className="font-mono px-2">{adesao.numeroIdentificador}</td>
-                  <td className="font-mono px-2">{adesao.orgaoAderente}</td>
-                  <td className="font-mono px-2">{formatDate(adesao.data)}</td>
-                  <td className="text-right font-mono px-2">{formatCurrency(adesao.valorAderido)}</td>
-                  <td className="text-center px-2">
+                  <td className="font-mono px-1 truncate" title={adesao.ata.nup}>{adesao.ata.nup}</td>
+                  <td className="font-mono px-1 truncate" title={adesao.ata.modalidade}>{adesao.ata.modalidade}</td>
+                  <td className="px-1 truncate max-w-xs" title={adesao.ata.objeto}>{adesao.ata.objeto}</td>
+                  <td className="font-mono px-1 truncate" title={adesao.numeroIdentificador}>{adesao.numeroIdentificador}</td>
+                  <td className="font-mono px-1 truncate" title={adesao.orgaoAderente}>{adesao.orgaoAderente}</td>
+                  <td className="font-mono px-1">{formatDate(adesao.data)}</td>
+                  <td className="text-right font-mono px-1">{formatCurrency(adesao.valorAderido)}</td>
+                  <td className="text-center px-1">
                     <div className="flex gap-1 justify-center">
                       <button 
-                        className="btn btn-secondary btn-xs" 
+                        className="btn btn-secondary btn-xs p-1" 
                         title="Editar"
                         onClick={() => openForm(adesao)}
                       >
-                        <Edit size={14} />
+                        <Edit size={12} />
                       </button>
                       {isAdmin() && (
                         <button
-                          className="btn btn-danger btn-xs"
+                          className="btn btn-danger btn-xs p-1"
                           onClick={() => handleDelete(adesao.id)}
                           title="Deletar"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={12} />
                         </button>
                       )}
                     </div>
