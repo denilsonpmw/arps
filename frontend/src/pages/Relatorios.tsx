@@ -188,6 +188,9 @@ export default function Relatorios() {
               <p className="text-2xl font-bold text-orange-700 dark:text-orange-400">
                 {formatCurrency(resultado.totalAderido || 0)}
               </p>
+              <p className="text-sm mt-1 text-gray-600 dark:text-gray-400">
+                {percentualUtilizado.toFixed(1)}% do limite
+              </p>
             </div>
 
             <div className={`card ${percentualUtilizado > 80 ? 'bg-red-50 dark:bg-red-900/20' : 'bg-purple-50 dark:bg-purple-900/20'}`}>
@@ -199,7 +202,7 @@ export default function Relatorios() {
                 {formatCurrency(resultado.saldoDisponivel)}
               </p>
               <p className="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                {percentualUtilizado.toFixed(1)}% utilizado
+                {(100 - percentualUtilizado).toFixed(1)}% disponível
               </p>
             </div>
           </div>
