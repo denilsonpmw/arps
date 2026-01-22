@@ -49,8 +49,7 @@ export default function Layout({ children, currentPage, onPageChange }: LayoutPr
           sidebarOpen ? 'w-64' : 'w-16 sm:w-20'
         } bg-blue-900 dark:bg-gray-800 text-white transition-all duration-300 fixed h-screen overflow-y-auto z-40`}
       >
-        <div className="p-2 sm:p-4 border-b border-blue-800 dark:border-gray-700 flex items-center justify-between">
-          {sidebarOpen && <h1 className="text-sm sm:text-lg font-bold hidden sm:block">ARPS</h1>}
+        <div className="p-2 sm:p-4 border-b border-blue-800 dark:border-gray-700 flex items-center justify-center">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="p-1 sm:p-2 hover:bg-blue-800 dark:hover:bg-gray-700 rounded"
@@ -84,7 +83,11 @@ export default function Layout({ children, currentPage, onPageChange }: LayoutPr
             title={`Tema: ${theme === 'system' ? 'Sistema' : theme === 'light' ? 'Claro' : 'Escuro'}`}
           >
             {getThemeIcon()}
-            {sidebarOpen && <span className="truncate">Tema</span>}
+            {sidebarOpen && (
+              <span className="truncate">
+                Tema: {theme === 'system' ? 'Sistema' : theme === 'light' ? 'Claro' : 'Escuro'}
+              </span>
+            )}
           </button>
           
           {/* Logout */}

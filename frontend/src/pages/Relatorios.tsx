@@ -64,7 +64,7 @@ export default function Relatorios() {
               <input
                 type="text"
                 className="input"
-                placeholder="Ex: 00000.0.062821/2025"
+                placeholder="Ex: 00000.0.012345/2025"
                 value={busca.nup}
                 onChange={(e) => setBusca({ ...busca, nup: e.target.value })}
               />
@@ -77,7 +77,7 @@ export default function Relatorios() {
               <input
                 type="text"
                 className="input"
-                placeholder="Ex: 01/2024"
+                placeholder="Ex: 001/2025"
                 value={busca.arpNumero}
                 onChange={(e) => setBusca({ ...busca, arpNumero: e.target.value })}
               />
@@ -90,7 +90,7 @@ export default function Relatorios() {
               <input
                 type="text"
                 className="input"
-                placeholder="Ex: PE 053/2025"
+                placeholder="Ex: PE 001/2025"
                 value={busca.modalidade}
                 onChange={(e) => setBusca({ ...busca, modalidade: e.target.value })}
               />
