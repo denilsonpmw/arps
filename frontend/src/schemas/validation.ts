@@ -4,7 +4,7 @@ export const createAtaSchema = z.object({
   nup: z.string().min(1, 'NUP é obrigatório').max(50),
   modalidade: z.string().min(1, 'Modalidade é obrigatória').max(50),
   arpNumero: z.string().max(20).optional().or(z.literal('')),
-  orgaoGerenciador: z.string().min(1, 'Órgão gerenciador é obrigatório').max(10),
+  orgaoGerenciador: z.string().min(1, 'Órgão demandante é obrigatório').max(10),
   objeto: z.string().min(1, 'Objeto é obrigatório').max(500),
   vigenciaFinal: z.string().refine(
     (date) => !date || new Date(date) > new Date(),

@@ -98,7 +98,7 @@ export function RelatorioAta({ ataId, isOpen, onClose }: RelatorioAtaProps) {
                     <p className="font-semibold print:text-black">{resultado.modalidade}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Órgão Gerenciador</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Órgão Demandante</p>
                     <p className="font-semibold print:text-black">{resultado.orgaoGerenciador}</p>
                   </div>
                   <div className="md:col-span-2">

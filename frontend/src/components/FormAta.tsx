@@ -127,7 +127,7 @@ export function FormAta({ isOpen, onClose, onSubmit, initialData, isLoading = fa
           />
 
           <FormField
-            label="Órgão Gerenciador"
+            label="Órgão Demandante"
             name="orgaoGerenciador"
             placeholder="Ex: MCTIC"
             value={String(values.orgaoGerenciador)}

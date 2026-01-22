@@ -144,7 +144,7 @@ export default function Relatorios() {
                 <p className="font-semibold">{resultado.modalidade}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Órgão Gerenciador</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Órgão Demandante</p>
                 <p className="font-semibold">{resultado.orgaoGerenciador}</p>
               </div>
               <div className="md:col-span-2">
