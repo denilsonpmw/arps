@@ -5,7 +5,7 @@ import { prisma } from '../index';
 import { AuthRequest } from '../middleware/auth';
 
 // Listar todos os usuários (apenas admin)
-export const listUsers = asyncHandler(async (req: AuthRequest, res: Response, _next: NextFunction) => {
+export const listUsers = asyncHandler(async (_req: AuthRequest, res: Response, _next: NextFunction) => {
   const users = await prisma.user.findMany({
     select: {
       id: true,
