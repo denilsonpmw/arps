@@ -268,22 +268,6 @@ export default function Atas() {
           </div>
         </div>
       )}
-          <button 
-            className="btn btn-secondary flex items-center gap-2" 
-            onClick={() => setIsImportOpen(true)}
-          >
-            <Upload size={20} />
-            Importar
-          </button>
-          <button 
-            className="btn btn-primary flex items-center gap-2" 
-            onClick={() => openForm()}
-          >
-            <Plus size={20} />
-            Nova Ata
-          </button>
-        </div>
-      </div>
 
       <FormAta
         isOpen={isFormOpen}
