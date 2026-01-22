@@ -118,6 +118,17 @@ export function FormAdesao({
     handleChange(e);
   };
 
+  const handleOrgaoAderenteChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const uppercasedEvent = {
+      ...e,
+      target: {
+        ...e.target,
+        value: e.target.value.toUpperCase()
+      }
+    };
+    handleChange(uppercasedEvent as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>);
+  };
+
   const maxValorAdesao = selectedAta ? (selectedAta.valorTotal * 0.5) : 0;
   const saldoDisponivel = selectedAta ? (selectedAta.valorAdesao - (selectedAta.totalAderido || 0)) : 0;
   const valorInformado = parseFloat(String(values.valorAderido)) || 0;
@@ -195,7 +206,7 @@ export function FormAdesao({
           name="orgaoAderente"
           placeholder="Ex: SUPEL"
           value={String(values.orgaoAderente)}
-          onChange={handleChange}
+          onChange={handleOrgaoAderenteChange}
           error={errors.orgaoAderente}
           required
           maxLength={10}

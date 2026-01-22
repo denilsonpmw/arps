@@ -221,4 +221,25 @@ code, pre {
     padding: 20px !important;
     box-shadow: none !important;
   }
+
+  /* Forçar cards financeiros a ficarem na mesma linha */
+  .grid-cols-1.md\\:grid-cols-4 {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+  }
+
+  .grid-cols-1.md\\:grid-cols-4 > .card {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    font-size: 0.75rem !important;
+  }
+
+  .grid-cols-1.md\\:grid-cols-4 > .card .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  .grid-cols-1.md\\:grid-cols-4 > .card .text-sm {
+    font-size: 0.65rem !important;
+  }
 }
