@@ -9,6 +9,7 @@ import adesaoRoutes from './routes/adesaoRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
 import importRoutes from './routes/importRoutes';
 import userRoutes from './routes/userRoutes';
+import setupRoutes from './routes/setupRoutes';
 import { authMiddleware } from './middleware/auth';
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.get('/health', (_req, res) => {
 
 // Rotas públicas (sem autenticação)
 app.use('/api/auth', authRoutes);
+app.use('/api/setup', setupRoutes);
 
 // Rotas protegidas (com autenticação)
 app.use('/api/atas', authMiddleware, ataRoutes);
