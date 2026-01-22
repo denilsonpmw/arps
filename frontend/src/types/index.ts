@@ -45,6 +45,8 @@ export interface AtaAlerta {
   saldoDisponivel: number;
   saldoCritico: boolean;
   vigenciaProxima: boolean;
+  vigenciaFinal: string;
+  valorAdesao: number;
 }
 
 export interface CreateAtaInput {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Login from './pages/Login';
 import Layout from './components/Layout';
@@ -8,34 +8,30 @@ import Adesoes from './pages/Adesoes';
 import Relatorios from './pages/Relatorios';
 import Usuarios from './pages/Usuarios';
 
-type PageType = 'dashboard' | 'atas' | 'adesoes' | 'relatorios' | 'usuarios' | 'ata-detail';
+type PageType = 'dashboard' | 'atas' | 'adesoes' | 'relatorios' | 'usuarios';
 
 function AppContent() {
   const { user, loading } = useAuth();
   const [currentPage, setCurrentPage] = useState<PageType>('dashboard');
-  const [selectedAtaId, setSelectedAtaId] = useState<string | null>(null);
 
-  const handlePageChange = (page: PageType, ataId?: string) => {
+  const handlePageChange = (page: PageType) => {
     setCurrentPage(page);
-    if (ataId) {
-      setSelectedAtaId(ataId);
-    }
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case 'dashboard':
-        return <Dashboard onNavigate={handlePageChange} />;
+        return <Dashboard />;
       case 'atas':
-        return <Atas onNavigate={handlePageChange} />;
+        return <Atas />;
       case 'adesoes':
-        return <Adesoes onNavigate={handlePageChange} />;
+        return <Adesoes />;
       case 'relatorios':
         return <Relatorios />;
       case 'usuarios':
         return <Usuarios />;
       default:
-        return <Dashboard onNavigate={handlePageChange} />;
+        return <Dashboard />;
     }
   };
 

@@ -4,11 +4,7 @@ import { DashboardData } from '../types';
 import { formatCurrency, formatDate } from '../utils/format';
 import { AlertCircle, TrendingUp, CheckCircle, AlertTriangle } from 'lucide-react';
 
-interface DashboardProps {
-  onNavigate?: (page: string) => void;
-}
-
-export default function Dashboard({ onNavigate }: DashboardProps) {
+export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<DashboardData | null>(null);

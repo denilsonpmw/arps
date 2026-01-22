@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, FileText, Calendar, DollarSign, Building } from 'lucide-react';
+import { Search, FileText, DollarSign, Building } from 'lucide-react';
 import { relatoriosService } from '../services/api';
 import { formatCurrency, formatDate } from '../utils/format';
 import type { Ata, Adesao } from '../types';

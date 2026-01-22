@@ -15,6 +15,7 @@ interface FormFieldProps {
   min?: string | number;
   max?: string | number;
   step?: string | number;
+  maxLength?: number;
 }
 
 export function FormField({
@@ -29,7 +30,10 @@ export function FormField({
   disabled = false,
   as = 'input',
   children,
-  ...props
+  min,
+  max,
+  step,
+  maxLength,
 }: FormFieldProps) {
   const baseClasses =
     'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 disabled:cursor-not-allowed font-sans';
@@ -49,8 +53,8 @@ export function FormField({
           value={value}
           onChange={onChange}
           disabled={disabled}
+          maxLength={maxLength}
           className={`${baseClasses} ${errorClasses} resize-vertical min-h-[100px]`}
-          {...props}
         />
       ) : as === 'select' ? (
         <select
@@ -59,7 +63,6 @@ export function FormField({
           onChange={onChange}
           disabled={disabled}
           className={`${baseClasses} ${errorClasses}`}
-          {...props}
         >
           {children}
         </select>
@@ -71,8 +74,11 @@ export function FormField({
           value={value}
           onChange={onChange}
           disabled={disabled}
+          min={min}
+          max={max}
+          step={step}
+          maxLength={maxLength}
           className={`${baseClasses} ${errorClasses}`}
-          {...props}
         />
       )}
 
