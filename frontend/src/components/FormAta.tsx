@@ -172,7 +172,7 @@ export function FormAta({ isOpen, onClose, onSubmit, initialData, isLoading = fa
           />
         </div>
 
-        <div className="flex gap-3 pt-4 border-t">
+        <div className="flex gap-3 pt-4 border-t dark:border-gray-700">
           <button
             type="button"
             onClick={onClose}

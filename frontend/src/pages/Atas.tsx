@@ -2,9 +2,10 @@ import { useEffect, useState, useMemo } from 'react';
 import { atasService } from '../services/api';
 import { Ata } from '../types';
 import { formatCurrency, formatDate, isSaldoCritico } from '../utils/format';
-import { Plus, Edit, Trash2, Upload, Trash, Search, X } from 'lucide-react';
+import { Plus, Edit, Trash2, Upload, Trash, Search, X, FileText } from 'lucide-react';
 import { FormAta } from '../components/FormAta';
 import { ImportModal } from '../components/ImportModal';
+import { RelatorioAta } from '../components/RelatorioAta';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function Atas() {
@@ -17,6 +18,7 @@ export default function Atas() {
   const [editingAta, setEditingAta] = useState<Ata | undefined>();
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [relatorioAtaId, setRelatorioAtaId] = useState<string | null>(null);
   
   // Filtros
   const [filtros, setFiltros] = useState({
@@ -357,6 +359,13 @@ export default function Atas() {
                     <div className="flex gap-0.5 justify-center">
                       <button 
                         className="btn btn-secondary btn-xs p-0.5" 
+                        title="Relatório"
+                        onClick={() => setRelatorioAtaId(ata.id)}
+                      >
+                        <FileText size={14} />
+                      </button>
+                      <button 
+                        className="btn btn-secondary btn-xs p-0.5" 
                         title="Editar"
                         onClick={() => openForm(ata)}
                       >
@@ -379,6 +388,12 @@ export default function Atas() {
           </table>
         </div>
       )}
+
+      <RelatorioAta
+        ataId={relatorioAtaId || ''}
+        isOpen={!!relatorioAtaId}
+        onClose={() => setRelatorioAtaId(null)}
+      />
     </div>
   );
 }

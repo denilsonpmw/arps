@@ -68,7 +68,32 @@ export const deleteAta = asyncHandler(async (req: Request, res: Response, _next:
 
 export const buscarAtaParaRelatorio = asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
   const { nup, arpNumero, modalidade } = req.query;
+  const { id } = req.params;
 
+  // Se tem ID na rota, buscar por ID
+  if (id) {
+    const ata = await prisma.ata.findUnique({
+      where: { id },
+      include: {
+        adesoes: {
+          orderBy: { data: 'desc' },
+        },
+      },
+    });
+
+    if (!ata) {
+      res.status(404).json({ success: false, error: { message: 'Ata não encontrada' } });
+      return;
+    }
+
+    const totalAderido = ata.adesoes.reduce((sum, a) => sum + a.valorAderido.toNumber(), 0);
+    const ataComTotal = { ...ata, totalAderido };
+
+    res.json({ success: true, data: ataComTotal });
+    return;
+  }
+
+  // Caso contrário, buscar por parâmetros de query
   if (!nup && !arpNumero && !modalidade) {
     res.status(400).json({ 
       success: false, 

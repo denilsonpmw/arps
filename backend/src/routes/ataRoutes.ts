@@ -62,6 +62,7 @@ router.delete('/bulk', adminMiddleware, async (req, res) => {
 router.post('/', createAta);
 router.get('/', listAtas);
 router.get('/relatorio/buscar', buscarAtaParaRelatorio);
+router.get('/:id/relatorio', buscarAtaParaRelatorio);
 router.get('/:id', getAta);
 router.patch('/:id', updateAta);
 router.delete('/:id', adminMiddleware, deleteAta);

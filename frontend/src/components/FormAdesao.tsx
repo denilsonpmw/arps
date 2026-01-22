@@ -158,21 +158,21 @@ export function FormAdesao({
         )}
 
         {selectedAta && (
-          <div className="bg-gray-50 p-3 rounded-lg text-sm">
-            <p className="font-medium text-gray-700">Ata: {selectedAta.arpNumero}</p>
-            <p className="text-gray-600">{selectedAta.objeto}</p>
+          <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg text-sm">
+            <p className="font-medium text-gray-700 dark:text-gray-200">Ata: {selectedAta.arpNumero}</p>
+            <p className="text-gray-600 dark:text-gray-400">{selectedAta.objeto}</p>
             <div className="grid grid-cols-3 gap-2 mt-2 text-xs">
               <div>
-                <span className="text-gray-600">Valor Total:</span>
-                <p className="font-semibold">{formatCurrency(selectedAta.valorTotal)}</p>
+                <span className="text-gray-600 dark:text-gray-400">Valor Total:</span>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">{formatCurrency(selectedAta.valorTotal)}</p>
               </div>
               <div>
-                <span className="text-gray-600">Max por Adesão:</span>
-                <p className="font-semibold">{formatCurrency(maxValorAdesao)}</p>
+                <span className="text-gray-600 dark:text-gray-400">Max por Adesão:</span>
+                <p className="font-semibold text-gray-900 dark:text-gray-100">{formatCurrency(maxValorAdesao)}</p>
               </div>
               <div>
-                <span className="text-gray-600">Saldo:</span>
-                <p className={`font-semibold ${saldoDisponivel < selectedAta.valorTotal * 0.2 ? 'text-red-600' : ''}`}>
+                <span className="text-gray-600 dark:text-gray-400">Saldo:</span>
+                <p className={`font-semibold ${saldoDisponivel < selectedAta.valorTotal * 0.2 ? 'text-red-600 dark:text-red-400' : 'text-gray-900 dark:text-gray-100'}`}>
                   {formatCurrency(saldoDisponivel)}
                 </p>
               </div>
@@ -229,7 +229,7 @@ export function FormAdesao({
           </div>
         )}
 
-        <div className="flex gap-3 pt-4 border-t">
+        <div className="flex gap-3 pt-4 border-t dark:border-gray-700">
           <button
             type="button"
             onClick={onClose}

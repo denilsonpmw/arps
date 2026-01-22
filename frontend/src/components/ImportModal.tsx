@@ -99,9 +99,9 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
         {/* Upload Step */}
         {step === 'upload' && (
           <>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-              <Upload className="w-12 h-12 mx-auto text-gray-400 mb-4" />
-              <p className="text-gray-600 mb-2">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center bg-gray-50 dark:bg-gray-800">
+              <Upload className="w-12 h-12 mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+              <p className="text-gray-600 dark:text-gray-400 mb-2">
                 Selecione um arquivo JSON com os processos de RP
               </p>
               <input
@@ -120,17 +120,17 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
             </div>
 
             {file && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center gap-3">
-                <FileText className="w-5 h-5 text-blue-600" />
+              <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg p-4 flex items-center gap-3">
+                <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <div className="flex-1">
-                  <p className="font-medium text-blue-900">{file.name}</p>
-                  <p className="text-sm text-blue-700">
+                  <p className="font-medium text-blue-900 dark:text-blue-300">{file.name}</p>
+                  <p className="text-sm text-blue-700 dark:text-blue-400">
                     {(file.size / 1024).toFixed(2)} KB
                   </p>
                 </div>
                 <button
                   onClick={() => setFile(null)}
-                  className="text-blue-600 hover:text-blue-800"
+                  className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -144,7 +144,7 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
               </div>
             )}
 
-            <div className="flex gap-3 pt-4 border-t">
+            <div className="flex gap-3 pt-4 border-t dark:border-gray-700">
               <button
                 type="button"
                 onClick={handleClose}
@@ -167,33 +167,33 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
         {step === 'preview' && preview && (
           <>
             <div className="space-y-3">
-              <h3 className="font-semibold text-lg">Análise do Arquivo</h3>
+              <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Análise do Arquivo</h3>
               
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <p className="text-sm text-blue-600 mb-1">Total de Processos</p>
-                  <p className="text-2xl font-bold text-blue-900">
+                <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                  <p className="text-sm text-blue-600 dark:text-blue-400 mb-1">Total de Processos</p>
+                  <p className="text-2xl font-bold text-blue-900 dark:text-blue-300">
                     {preview.totalProcessos}
                   </p>
                 </div>
 
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <p className="text-sm text-green-600 mb-1">Prontos para Importar</p>
-                  <p className="text-2xl font-bold text-green-900">
+                <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                  <p className="text-sm text-green-600 dark:text-green-400 mb-1">Prontos para Importar</p>
+                  <p className="text-2xl font-bold text-green-900 dark:text-green-300">
                     {preview.processosValidos}
                   </p>
                 </div>
 
-                <div className="bg-yellow-50 p-4 rounded-lg">
-                  <p className="text-sm text-yellow-600 mb-1">Já Existentes</p>
-                  <p className="text-2xl font-bold text-yellow-900">
+                <div className="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg">
+                  <p className="text-sm text-yellow-600 dark:text-yellow-400 mb-1">Já Existentes</p>
+                  <p className="text-2xl font-bold text-yellow-900 dark:text-yellow-300">
                     {preview.nupsDuplicados}
                   </p>
                 </div>
 
-                <div className="bg-red-50 p-4 rounded-lg">
-                  <p className="text-sm text-red-600 mb-1">Inválidos</p>
-                  <p className="text-2xl font-bold text-red-900">
+                <div className="bg-red-50 dark:bg-red-900/30 p-4 rounded-lg">
+                  <p className="text-sm text-red-600 dark:text-red-400 mb-1">Inválidos</p>
+                  <p className="text-2xl font-bold text-red-900 dark:text-red-300">
                     {preview.processosInvalidos}
                   </p>
                 </div>
@@ -206,7 +206,7 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
               )}
             </div>
 
-            <div className="flex gap-3 pt-4 border-t">
+            <div className="flex gap-3 pt-4 border-t dark:border-gray-700">
               <button
                 onClick={() => setStep('upload')}
                 className="btn btn-secondary flex-1"
@@ -230,36 +230,36 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
           <>
             <div className="space-y-4">
               <div className="flex items-center gap-3 mb-4">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+                <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
                 <div>
-                  <h3 className="font-semibold text-lg">Importação Concluída</h3>
-                  <p className="text-gray-600">
+                  <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Importação Concluída</h3>
+                  <p className="text-gray-600 dark:text-gray-400">
                     {resultado.importados} de {resultado.total} atas importadas com sucesso
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-3 gap-3">
-                <div className="bg-green-50 p-3 rounded text-center">
-                  <p className="text-2xl font-bold text-green-900">{resultado.importados}</p>
-                  <p className="text-xs text-green-600">Importados</p>
+                <div className="bg-green-50 dark:bg-green-900/30 p-3 rounded text-center">
+                  <p className="text-2xl font-bold text-green-900 dark:text-green-300">{resultado.importados}</p>
+                  <p className="text-xs text-green-600 dark:text-green-400">Importados</p>
                 </div>
-                <div className="bg-gray-50 p-3 rounded text-center">
-                  <p className="text-2xl font-bold text-gray-900">{resultado.ignorados}</p>
-                  <p className="text-xs text-gray-600">Ignorados</p>
+                <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded text-center">
+                  <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{resultado.ignorados}</p>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">Ignorados</p>
                 </div>
-                <div className="bg-red-50 p-3 rounded text-center">
-                  <p className="text-2xl font-bold text-red-900">{resultado.erros.length}</p>
-                  <p className="text-xs text-red-600">Erros</p>
+                <div className="bg-red-50 dark:bg-red-900/30 p-3 rounded text-center">
+                  <p className="text-2xl font-bold text-red-900 dark:text-red-300">{resultado.erros.length}</p>
+                  <p className="text-xs text-red-600 dark:text-red-400">Erros</p>
                 </div>
               </div>
 
               {resultado.erros.length > 0 && (
                 <div className="mt-4">
-                  <p className="font-semibold text-sm text-red-900 mb-2">Erros:</p>
-                  <div className="max-h-40 overflow-y-auto bg-red-50 rounded p-3">
+                  <p className="font-semibold text-sm text-red-900 dark:text-red-300 mb-2">Erros:</p>
+                  <div className="max-h-40 overflow-y-auto bg-red-50 dark:bg-red-900/30 rounded p-3">
                     {resultado.erros.map((erro, idx) => (
-                      <div key={idx} className="text-xs text-red-800 mb-1">
+                      <div key={idx} className="text-xs text-red-800 dark:text-red-300 mb-1">
                         <strong>{erro.nup}:</strong> {erro.erro}
                       </div>
                     ))}
@@ -269,12 +269,12 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
 
               {resultado.atasImportadas.length > 0 && (
                 <div className="mt-4">
-                  <p className="font-semibold text-sm text-green-900 mb-2">
+                  <p className="font-semibold text-sm text-green-900 dark:text-green-300 mb-2">
                     Atas Importadas ({resultado.atasImportadas.length}):
                   </p>
-                  <div className="max-h-40 overflow-y-auto bg-green-50 rounded p-3">
+                  <div className="max-h-40 overflow-y-auto bg-green-50 dark:bg-green-900/30 rounded p-3">
                     {resultado.atasImportadas.map((ata, idx) => (
-                      <div key={idx} className="text-xs text-green-800 mb-1">
+                      <div key={idx} className="text-xs text-green-800 dark:text-green-300 mb-1">
                         <strong>{ata.arpNumero}</strong> - {ata.nup}
                       </div>
                     ))}
@@ -283,7 +283,7 @@ export function ImportModal({ isOpen, onClose, onSuccess }: ImportModalProps) {
               )}
             </div>
 
-            <div className="flex gap-3 pt-4 border-t">
+            <div className="flex gap-3 pt-4 border-t dark:border-gray-700">
               <button
                 onClick={handleClose}
                 className="btn btn-primary flex-1"

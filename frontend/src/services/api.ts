@@ -164,6 +164,13 @@ export const relatoriosService = {
     );
     return response.data.data;
   },
+
+  buscarAtaPorId: async (ataId: string) => {
+    const response = await api.get<{ success: boolean; data: Ata & { adesoes: any[] } }>(
+      `/atas/${ataId}/relatorio`
+    );
+    return response.data.data;
+  },
 };
 
 // Export default da instância axios para uso direto
