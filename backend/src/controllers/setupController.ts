@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { prisma } from '../index';
 
-export const createInitialAdmin = async (req: Request, res: Response) => {
+export const createInitialAdmin = async (_req: Request, res: Response) => {
   try {
     // Verificar se já existe
     const existing = await prisma.user.findUnique({
