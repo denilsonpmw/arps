@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { asyncHandler } from '../middleware/errorHandler';
 import { prisma } from '../index';

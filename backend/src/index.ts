@@ -22,7 +22,7 @@ app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
@@ -37,7 +37,7 @@ app.use('/api/import', authMiddleware, importRoutes);
 app.use('/api/users', userRoutes); // já tem authMiddleware e adminMiddleware internamente
 
 // 404 handler
-app.use((req, res) => {
+app.use((_req, res) => {
   res.status(404).json({ success: false, error: { message: 'Rota não encontrada' } });
 });
 

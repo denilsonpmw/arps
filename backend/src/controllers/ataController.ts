@@ -77,13 +77,14 @@ export const buscarAtaParaRelatorio = asyncHandler(async (req: Request, res: Res
     return;
   }
 
+  const filters = [];
+  if (nup) filters.push({ nup: String(nup) });
+  if (arpNumero) filters.push({ arpNumero: { contains: String(arpNumero), mode: 'insensitive' as const } });
+  if (modalidade) filters.push({ modalidade: { contains: String(modalidade), mode: 'insensitive' as const } });
+
   const ata = await prisma.ata.findFirst({
     where: {
-      OR: [
-        nup ? { nup: String(nup) } : undefined,
-        arpNumero ? { arpNumero: { contains: String(arpNumero), mode: 'insensitive' } } : undefined,
-        modalidade ? { modalidade: { contains: String(modalidade), mode: 'insensitive' } } : undefined,
-      ].filter(Boolean),
+      OR: filters,
     },
     include: {
       adesoes: {

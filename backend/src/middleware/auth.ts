@@ -9,15 +9,16 @@ export interface AuthRequest extends Request {
   userRole?: string;
 }
 
-export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const authMiddleware = (req: AuthRequest, res: Response, next: NextFunction): void => {
   try {
     const token = req.headers.authorization?.replace('Bearer ', '');
 
     if (!token) {
-      return res.status(401).json({
+      res.status(401).json({
         success: false,
         error: { message: 'Token de autenticação não fornecido' },
       });
+      return;
     }
 
     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string; email: string; role: string };
@@ -27,7 +28,7 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
 
     next();
   } catch (error) {
-    return res.status(401).json({
+    res.status(401).json({
       success: false,
       error: { message: 'Token inválido ou expirado' },
     });

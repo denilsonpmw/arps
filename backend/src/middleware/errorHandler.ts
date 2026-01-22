@@ -4,7 +4,7 @@ export interface ApiError extends Error {
   statusCode?: number;
 }
 
-export function errorHandler(err: ApiError, req: Request, res: Response, next: NextFunction): void {
+export function errorHandler(err: ApiError, _req: Request, res: Response, _next: NextFunction): void {
   console.error(err);
 
   const statusCode = err.statusCode || 500;
