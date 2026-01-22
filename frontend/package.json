@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview --host 0.0.0.0 --port $PORT --strictPort false",
+    "preview": "serve -s dist -l ${PORT:-3000}",
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "autoprefixer": "^10.4.16",
     "eslint": "^8.53.0",
     "postcss": "^8.4.31",
+    "serve": "^14.2.5",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.2.2",
     "vite": "^5.0.2"
