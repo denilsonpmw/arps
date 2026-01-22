@@ -39,10 +39,6 @@ export function RelatorioAta({ ataId, isOpen, onClose }: RelatorioAtaProps) {
     }
   };
 
-  const handleImprimir = () => {
-    window.print();
-  };
-
   if (!isOpen) return null;
 
   const percentualUtilizado = resultado 
