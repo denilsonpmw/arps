@@ -136,17 +136,22 @@ export default function Atas() {
         if (!matches) return false;
       }
 
-      // Filtro de data de vigência
-      if (filtros.dataInicio && ata.vigenciaFinal) {
-        const vigencia = new Date(ata.vigenciaFinal);
-        const inicio = new Date(filtros.dataInicio);
-        if (vigencia < inicio) return false;
-      }
+      // Filtro de data de vigência - exclui atas sem data quando há filtro ativo
+      if (filtros.dataInicio || filtros.dataFim) {
+        // Se há filtro de data, exclui atas sem vigenciaFinal
+        if (!ata.vigenciaFinal) return false;
 
-      if (filtros.dataFim && ata.vigenciaFinal) {
         const vigencia = new Date(ata.vigenciaFinal);
-        const fim = new Date(filtros.dataFim);
-        if (vigencia > fim) return false;
+        
+        if (filtros.dataInicio) {
+          const inicio = new Date(filtros.dataInicio);
+          if (vigencia < inicio) return false;
+        }
+
+        if (filtros.dataFim) {
+          const fim = new Date(filtros.dataFim);
+          if (vigencia > fim) return false;
+        }
       }
 
       return true;
