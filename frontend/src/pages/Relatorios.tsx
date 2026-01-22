@@ -58,7 +58,7 @@ export default function Relatorios() {
         <form onSubmit={handleBuscar} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 NUP
               </label>
               <input
@@ -71,7 +71,7 @@ export default function Relatorios() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Número da Ata
               </label>
               <input
@@ -84,7 +84,7 @@ export default function Relatorios() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Modalidade
               </label>
               <input
@@ -132,27 +132,27 @@ export default function Relatorios() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-600">NUP</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">NUP</p>
                 <p className="font-semibold">{resultado.nup}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Número da Ata</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Número da Ata</p>
                 <p className="font-semibold">{resultado.arpNumero || '-'}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Modalidade</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Modalidade</p>
                 <p className="font-semibold">{resultado.modalidade}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Órgão Gerenciador</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Órgão Gerenciador</p>
                 <p className="font-semibold">{resultado.orgaoGerenciador}</p>
               </div>
               <div className="md:col-span-2">
-                <p className="text-sm text-gray-600">Objeto</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Objeto</p>
                 <p className="font-semibold">{resultado.objeto}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Vigência Final</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Vigência Final</p>
                 <p className="font-semibold">{formatDate(resultado.vigenciaFinal)}</p>
               </div>
             </div>
@@ -160,45 +160,45 @@ export default function Relatorios() {
 
           {/* Resumo Financeiro */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="card bg-blue-50">
+            <div className="card bg-blue-50 dark:bg-blue-900/20">
               <div className="flex items-center gap-3 mb-2">
-                <DollarSign size={24} className="text-blue-600" />
-                <p className="text-sm text-gray-700">Valor Total</p>
+                <DollarSign size={24} className="text-blue-600 dark:text-blue-400" />
+                <p className="text-sm text-gray-700 dark:text-gray-300">Valor Total</p>
               </div>
-              <p className="text-2xl font-bold text-blue-700">
+              <p className="text-2xl font-bold text-blue-700 dark:text-blue-400">
                 {formatCurrency(resultado.valorTotal)}
               </p>
             </div>
 
-            <div className="card bg-green-50">
+            <div className="card bg-green-50 dark:bg-green-900/20">
               <div className="flex items-center gap-3 mb-2">
-                <DollarSign size={24} className="text-green-600" />
-                <p className="text-sm text-gray-700">Limite Global</p>
+                <DollarSign size={24} className="text-green-600 dark:text-green-400" />
+                <p className="text-sm text-gray-700 dark:text-gray-300">Limite Global</p>
               </div>
-              <p className="text-2xl font-bold text-green-700">
+              <p className="text-2xl font-bold text-green-700 dark:text-green-400">
                 {formatCurrency(resultado.valorAdesao)}
               </p>
             </div>
 
-            <div className="card bg-orange-50">
+            <div className="card bg-orange-50 dark:bg-orange-900/20">
               <div className="flex items-center gap-3 mb-2">
-                <DollarSign size={24} className="text-orange-600" />
-                <p className="text-sm text-gray-700">Total Aderido</p>
+                <DollarSign size={24} className="text-orange-600 dark:text-orange-400" />
+                <p className="text-sm text-gray-700 dark:text-gray-300">Total Aderido</p>
               </div>
-              <p className="text-2xl font-bold text-orange-700">
+              <p className="text-2xl font-bold text-orange-700 dark:text-orange-400">
                 {formatCurrency(resultado.totalAderido || 0)}
               </p>
             </div>
 
-            <div className={`card ${percentualUtilizado > 80 ? 'bg-red-50' : 'bg-purple-50'}`}>
+            <div className={`card ${percentualUtilizado > 80 ? 'bg-red-50 dark:bg-red-900/20' : 'bg-purple-50 dark:bg-purple-900/20'}`}>
               <div className="flex items-center gap-3 mb-2">
-                <DollarSign size={24} className={percentualUtilizado > 80 ? 'text-red-600' : 'text-purple-600'} />
-                <p className="text-sm text-gray-700">Saldo</p>
+                <DollarSign size={24} className={percentualUtilizado > 80 ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'} />
+                <p className="text-sm text-gray-700 dark:text-gray-300">Saldo</p>
               </div>
-              <p className={`text-2xl font-bold ${percentualUtilizado > 80 ? 'text-red-700' : 'text-purple-700'}`}>
+              <p className={`text-2xl font-bold ${percentualUtilizado > 80 ? 'text-red-700 dark:text-red-400' : 'text-purple-700 dark:text-purple-400'}`}>
                 {formatCurrency(resultado.saldoDisponivel)}
               </p>
-              <p className="text-sm mt-1 text-gray-600">
+              <p className="text-sm mt-1 text-gray-600 dark:text-gray-400">
                 {percentualUtilizado.toFixed(1)}% utilizado
               </p>
             </div>
@@ -212,7 +212,7 @@ export default function Relatorios() {
             </h3>
 
             {resultado.adesoes.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
+              <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                 Nenhuma adesão registrada para esta ata
               </div>
             ) : (
@@ -231,7 +231,7 @@ export default function Relatorios() {
                       <tr key={adesao.id}>
                         <td className="font-mono">{adesao.numeroIdentificador}</td>
                         <td>{adesao.orgaoAderente}</td>
-                        <td className="font-semibold text-green-700">
+                        <td className="font-semibold text-green-700 dark:text-green-400">
                           {formatCurrency(adesao.valorAderido)}
                         </td>
                         <td>{formatDate(adesao.data)}</td>
