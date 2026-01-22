@@ -100,45 +100,45 @@ export default function Adesoes() {
         <div className="card text-center py-8 text-gray-500">Nenhuma adesão cadastrada</div>
       ) : (
         <div className="w-full">
-          <table className="table table-compact w-full text-[10px]">
+          <table className="table table-compact w-full text-xs">
             <thead>
               <tr className="bg-gray-100">
-                <th className="text-left px-1 w-24">NUP</th>
-                <th className="text-left px-1 w-20">MOD/Nº</th>
-                <th className="text-left px-1">Objeto</th>
-                <th className="text-left px-1 w-24">ID Adesão</th>
-                <th className="text-left px-1 w-32">Órgão Aderente</th>
-                <th className="text-left px-1 w-20">Data</th>
-                <th className="text-right px-1 w-24">Valor Aderido</th>
-                <th className="text-center px-1 w-16">Ações</th>
+                <th className="text-left px-0.5 w-20">NUP</th>
+                <th className="text-left px-0.5 w-16">MOD</th>
+                <th className="text-left px-0.5">Objeto</th>
+                <th className="text-left px-0.5 w-20">ID Adesão</th>
+                <th className="text-left px-0.5 w-28">Órgão Aderente</th>
+                <th className="text-left px-0.5 w-18">Data</th>
+                <th className="text-right px-0.5 w-20">Valor</th>
+                <th className="text-center px-0.5 w-14">Ações</th>
               </tr>
             </thead>
             <tbody>
               {adesoes.map((adesao) => (
                 <tr key={adesao.id} className="border-b hover:bg-gray-50">
-                  <td className="font-mono px-1 truncate" title={adesao.ata.nup}>{adesao.ata.nup}</td>
-                  <td className="font-mono px-1 truncate" title={adesao.ata.modalidade}>{adesao.ata.modalidade}</td>
-                  <td className="px-1 truncate max-w-xs" title={adesao.ata.objeto}>{adesao.ata.objeto}</td>
-                  <td className="font-mono px-1 truncate" title={adesao.numeroIdentificador}>{adesao.numeroIdentificador}</td>
-                  <td className="font-mono px-1 truncate" title={adesao.orgaoAderente}>{adesao.orgaoAderente}</td>
-                  <td className="font-mono px-1">{formatDate(adesao.data)}</td>
-                  <td className="text-right font-mono px-1">{formatCurrency(adesao.valorAderido)}</td>
-                  <td className="text-center px-1">
-                    <div className="flex gap-1 justify-center">
+                  <td className="font-mono px-0.5 truncate" title={adesao.ata.nup}>{adesao.ata.nup}</td>
+                  <td className="font-mono px-0.5 truncate" title={adesao.ata.modalidade}>{adesao.ata.modalidade}</td>
+                  <td className="px-0.5 truncate max-w-xs" title={adesao.ata.objeto}>{adesao.ata.objeto}</td>
+                  <td className="font-mono px-0.5 truncate" title={adesao.numeroIdentificador}>{adesao.numeroIdentificador}</td>
+                  <td className="font-mono px-0.5 truncate" title={adesao.orgaoAderente}>{adesao.orgaoAderente}</td>
+                  <td className="font-mono px-0.5">{formatDate(adesao.data)}</td>
+                  <td className="text-right font-mono px-0.5">{formatCurrency(adesao.valorAderido)}</td>
+                  <td className="text-center px-0.5">
+                    <div className="flex gap-0.5 justify-center">
                       <button 
-                        className="btn btn-secondary btn-xs p-1" 
+                        className="btn btn-secondary btn-xs p-0.5" 
                         title="Editar"
                         onClick={() => openForm(adesao)}
                       >
-                        <Edit size={12} />
+                        <Edit size={14} />
                       </button>
                       {isAdmin() && (
                         <button
-                          className="btn btn-danger btn-xs p-1"
+                          className="btn btn-danger btn-xs p-0.5"
                           onClick={() => handleDelete(adesao.id)}
                           title="Deletar"
                         >
-                          <Trash2 size={12} />
+                          <Trash2 size={14} />
                         </button>
                       )}
                     </div>

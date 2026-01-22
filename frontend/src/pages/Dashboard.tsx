@@ -135,31 +135,31 @@ export default function Dashboard() {
             Atas que Requerem Atenção ({data.atasAlerta.length})
           </h3>
           <div className="w-full">
-            <table className="table table-compact text-[10px] w-full">
+            <table className="table table-compact text-xs w-full">
               <thead>
                 <tr className="bg-yellow-50">
-                  <th className="text-left px-1 w-16">ARP Nº</th>
-                  <th className="text-left px-1 w-24">Órgão</th>
-                  <th className="text-left px-1">Objeto</th>
-                  <th className="text-center px-1 w-20">Vigência</th>
-                  <th className="text-right px-1 w-24">Lim. Adesão</th>
-                  <th className="text-right px-1 w-24">Saldo</th>
-                  <th className="text-center px-1 w-20">Status</th>
+                  <th className="text-left px-0.5 w-14">ARP</th>
+                  <th className="text-left px-0.5 w-20">Órgão</th>
+                  <th className="text-left px-0.5">Objeto</th>
+                  <th className="text-center px-0.5 w-18">Vigência</th>
+                  <th className="text-right px-0.5 w-20">Limite</th>
+                  <th className="text-right px-0.5 w-20">Saldo</th>
+                  <th className="text-center px-0.5 w-18">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {data.atasAlerta.map((ata) => (
                   <tr key={ata.id} className="border-b hover:bg-yellow-50">
-                    <td className="font-mono px-1 font-medium truncate" title={ata.arpNumero}>{ata.arpNumero}</td>
-                    <td className="px-1 truncate" title={ata.orgaoGerenciador}>{ata.orgaoGerenciador}</td>
-                    <td className="px-1 truncate max-w-xs" title={ata.objeto}>{ata.objeto}</td>
-                    <td className="text-center px-1">{formatDate(ata.vigenciaFinal)}</td>
-                    <td className="text-right px-1 font-mono">{formatCurrency(ata.valorAdesao)}</td>
-                    <td className={`text-right px-1 font-mono ${ata.saldoCritico ? 'text-red-600 font-bold' : ''}`}>
+                    <td className="font-mono px-0.5 font-medium truncate" title={ata.arpNumero}>{ata.arpNumero}</td>
+                    <td className="px-0.5 truncate" title={ata.orgaoGerenciador}>{ata.orgaoGerenciador}</td>
+                    <td className="px-0.5 truncate max-w-xs" title={ata.objeto}>{ata.objeto}</td>
+                    <td className="text-center px-0.5">{formatDate(ata.vigenciaFinal)}</td>
+                    <td className="text-right px-0.5 font-mono">{formatCurrency(ata.valorAdesao)}</td>
+                    <td className={`text-right px-0.5 font-mono ${ata.saldoCritico ? 'text-red-600 font-bold' : ''}`}>
                       {formatCurrency(ata.saldoDisponivel)}
                     </td>
-                    <td className="text-center px-1">
-                      <div className="flex gap-1 justify-center flex-wrap">
+                    <td className="text-center px-0.5">
+                      <div className="flex gap-0.5 justify-center flex-wrap">
                         {ata.saldoCritico && (
                           <span className="badge badge-danger badge-xs">Crítico</span>
                         )}
