@@ -218,8 +218,9 @@ code, pre {
     max-height: none !important;
     overflow: visible !important;
     margin: 0 !important;
-    padding: 20px !important;
+    padding: 12px !important;
     box-shadow: none !important;
+    font-size: 0.75rem !important;
   }
 
   /* Forçar cards financeiros a ficarem na mesma linha */
@@ -232,15 +233,82 @@ code, pre {
   .grid-cols-1.md\\:grid-cols-4 > .card {
     flex: 1 1 0 !important;
     min-width: 0 !important;
-    font-size: 0.7rem !important;
     padding: 6px !important;
   }
 
-  .grid-cols-1.md\\:grid-cols-4 > .card .text-lg {
+  /* Reduzir tamanhos de texto na impressão */
+  #modal-relatorio-content h1 {
+    font-size: 1.125rem !important;
+  }
+
+  #modal-relatorio-content h3 {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #modal-relatorio-content .card {
+    padding: 0.5rem !important;
+  }
+
+  #modal-relatorio-content p {
+    font-size: 0.75rem !important;
+  }
+
+  #modal-relatorio-content .font-bold,
+  #modal-relatorio-content .font-semibold {
+    font-size: 0.875rem !important;
+  }
+
+  #modal-relatorio-content .text-2xl {
     font-size: 1rem !important;
   }
 
-  .grid-cols-1.md\\:grid-cols-4 > .card .text-xs {
+  #modal-relatorio-content .text-lg {
+    font-size: 0.875rem !important;
+  }
+
+  #modal-relatorio-content .text-sm {
+    font-size: 0.65rem !important;
+  }
+
+  #modal-relatorio-content .text-xs {
     font-size: 0.6rem !important;
+  }
+
+  /* Reduzir espaçamentos */
+  #modal-relatorio-content .space-y-6 > * + * {
+    margin-top: 0.5rem !important;
+  }
+
+  #modal-relatorio-content .gap-4 {
+    gap: 0.25rem !important;
+  }
+
+  #modal-relatorio-content .mb-4 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  #modal-relatorio-content .mb-2 {
+    margin-bottom: 0.25rem !important;
+  }
+
+  #modal-relatorio-content .mt-1 {
+    margin-top: 0.125rem !important;
+  }
+
+  /* Ícones menores */
+  #modal-relatorio-content svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  /* Tabela compacta */
+  #modal-relatorio-content table {
+    font-size: 0.7rem !important;
+  }
+
+  #modal-relatorio-content th,
+  #modal-relatorio-content td {
+    padding: 0.25rem 0.5rem !important;
   }
 }
