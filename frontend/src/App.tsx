@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Login from './pages/Login';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
@@ -59,8 +60,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
