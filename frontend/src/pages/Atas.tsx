@@ -137,13 +137,13 @@ export default function Atas() {
       }
 
       // Filtro de data de vigência
-      if (filtros.dataInicio) {
+      if (filtros.dataInicio && ata.vigenciaFinal) {
         const vigencia = new Date(ata.vigenciaFinal);
         const inicio = new Date(filtros.dataInicio);
         if (vigencia < inicio) return false;
       }
 
-      if (filtros.dataFim) {
+      if (filtros.dataFim && ata.vigenciaFinal) {
         const vigencia = new Date(ata.vigenciaFinal);
         const fim = new Date(filtros.dataFim);
         if (vigencia > fim) return false;
@@ -216,7 +216,7 @@ export default function Atas() {
             </button>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Buscar por NUP, Modalidade, ARP, Órgão ou Objeto
@@ -232,7 +232,7 @@ export default function Atas() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Vigência - Data Início
+                Vigência Início
               </label>
               <input
                 type="date"
@@ -244,7 +244,7 @@ export default function Atas() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Vigência - Data Fim
+                Vigência Fim
               </label>
               <input
                 type="date"
