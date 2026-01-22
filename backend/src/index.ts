@@ -29,7 +29,7 @@ app.get('/health', (_req, res) => {
 
 // Rotas públicas (sem autenticação)
 app.use('/api/auth', authRoutes);
-app.use('/api/setup', setupRoutes);
+app.use('/api/setup', setupRoutes); // Rota para criar admin inicial
 
 // Rotas protegidas (com autenticação)
 app.use('/api/atas', authMiddleware, ataRoutes);
