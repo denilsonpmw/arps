@@ -200,46 +200,6 @@ code, pre {
     print-color-adjust: exact !important;
   }
 
-  /* Forçar tema claro na impressão */
-  * {
-    color: #000 !important;
-    background-color: #fff !important;
-    border-color: #e5e7eb !important;
-  }
-
-  /* Manter cores específicas dos cards e badges */
-  .print\\:bg-white {
-    background-color: #fff !important;
-  }
-
-  .print\\:text-black {
-    color: #000 !important;
-  }
-
-  .print\\:text-gray-600 {
-    color: #4b5563 !important;
-  }
-
-  .print\\:text-gray-700 {
-    color: #374151 !important;
-  }
-
-  .print\\:border {
-    border: 1px solid #e5e7eb !important;
-  }
-
-  .print\\:bg-gray-100 {
-    background-color: #f3f4f6 !important;
-  }
-
-  .print\\:border-b {
-    border-bottom: 1px solid #e5e7eb !important;
-  }
-
-  .print\\:border-t-2 {
-    border-top: 2px solid #000 !important;
-  }
-
   /* Imprimir apenas o modal de relatório quando aberto */
   body > #root > * {
     display: none !important;
