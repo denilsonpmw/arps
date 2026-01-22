@@ -206,8 +206,8 @@ export function RelatorioAta({ ataId, isOpen, onClose }: RelatorioAtaProps) {
                         ))}
                       </tbody>
                       <tfoot>
-                        <tr className="bg-gray-100 dark:bg-gray-700 print:bg-gray-100 print:border-t-2">
-                          <td colSpan={2} className="font-bold text-right print:text-black">Total:</td>
+                        <tr className="bg-gray-100 dark:bg-gray-700 print:bg-gray-100">
+                          <td colSpan={2} className="font-bold text-right text-gray-900 dark:text-gray-100 print:text-black">Total:</td>
                           <td className="font-bold text-green-700 dark:text-green-400 print:text-black">
                             {formatCurrency(resultado.totalAderido || 0)}
                           </td>
