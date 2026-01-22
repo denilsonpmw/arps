@@ -339,7 +339,7 @@ export default function Atas() {
                   <td className="font-mono px-0.5 truncate" title={ata.modalidade}>{ata.modalidade}</td>
                   <td className="font-mono px-0.5 truncate" title={ata.arpNumero}>{ata.arpNumero}</td>
                   <td className="font-mono px-0.5 truncate" title={ata.orgaoGerenciador}>{ata.orgaoGerenciador}</td>
-                  <td className="px-0.5 truncate max-w-xs" title={ata.objeto}>{ata.objeto}</td>
+                  <td className="px-0.5">{ata.objeto}</td>
                   <td className="font-mono px-0.5">{formatDate(ata.vigenciaFinal)}</td>
                   <td className="text-right font-mono px-0.5">{formatCurrency(ata.valorTotal)}</td>
                   <td className="text-right font-mono px-0.5">{formatCurrency(ata.valorAdesao)}</td>

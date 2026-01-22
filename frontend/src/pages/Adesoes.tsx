@@ -118,7 +118,7 @@ export default function Adesoes() {
                 <tr key={adesao.id} className="border-b hover:bg-gray-50">
                   <td className="font-mono px-0.5 truncate" title={adesao.ata.nup}>{adesao.ata.nup}</td>
                   <td className="font-mono px-0.5 truncate" title={adesao.ata.modalidade}>{adesao.ata.modalidade}</td>
-                  <td className="px-0.5 truncate max-w-xs" title={adesao.ata.objeto}>{adesao.ata.objeto}</td>
+                  <td className="px-0.5">{adesao.ata.objeto}</td>
                   <td className="font-mono px-0.5 truncate" title={adesao.numeroIdentificador}>{adesao.numeroIdentificador}</td>
                   <td className="font-mono px-0.5 truncate" title={adesao.orgaoAderente}>{adesao.orgaoAderente}</td>
                   <td className="font-mono px-0.5">{formatDate(adesao.data)}</td>
