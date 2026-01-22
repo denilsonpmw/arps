@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Menu, Home, FileText, CheckSquare, BarChart3, X, LogOut, Users } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
-type PageType = 'dashboard' | 'atas' | 'adesoes' | 'relatorios' | 'usuarios' | 'ata-detail';
+type PageType = 'dashboard' | 'atas' | 'adesoes' | 'relatorios' | 'usuarios';
 
 interface LayoutProps {
   children: React.ReactNode;
