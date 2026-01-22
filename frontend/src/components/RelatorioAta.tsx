@@ -61,115 +61,115 @@ export function RelatorioAta({ ataId, isOpen, onClose }: RelatorioAtaProps) {
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4">
           {loading && (
-            <div className="text-center py-12 text-gray-600 dark:text-gray-400">Carregando...</div>
+            <div className="text-center py-8 text-sm text-gray-600 dark:text-gray-400">Carregando...</div>
           )}
 
           {error && (
-            <div className="alert alert-danger">{error}</div>
+            <div className="alert alert-danger text-sm">{error}</div>
           )}
 
           {resultado && (
-            <div className="space-y-6 print:text-black">
+            <div className="space-y-3 print:text-black print:space-y-2">
               {/* Título para impressão */}
-              <div className="hidden print:block text-center mb-6">
-                <h1 className="text-2xl font-bold">Relatório de Adesões</h1>
-                <p className="text-gray-600 mt-2">Ata de Registro de Preços</p>
+              <div className="hidden print:block text-center mb-3">
+                <h1 className="text-lg font-bold">Relatório de Adesões</h1>
+                <p className="text-xs text-gray-600 mt-1">Ata de Registro de Preços</p>
               </div>
 
               {/* Informações da Ata */}
-              <div className="card print:shadow-none">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 print:text-black">
-                  <FileText size={20} className="no-print" />
+              <div className="card print:shadow-none print:p-2">
+                <h3 className="text-sm font-semibold mb-2 flex items-center gap-2 print:text-black">
+                  <FileText size={16} className="no-print" />
                   Informações da Ata
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 print:gap-1 text-sm">
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">NUP</p>
-                    <p className="font-semibold print:text-black">{resultado.nup}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 print:text-gray-600">NUP</p>
+                    <p className="font-semibold text-sm print:text-black">{resultado.nup}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Número da Ata</p>
-                    <p className="font-semibold print:text-black">{resultado.arpNumero || '-'}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 print:text-gray-600">Número da Ata</p>
+                    <p className="font-semibold text-sm print:text-black">{resultado.arpNumero || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Modalidade</p>
-                    <p className="font-semibold print:text-black">{resultado.modalidade}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 print:text-gray-600">Modalidade</p>
+                    <p className="font-semibold text-sm print:text-black">{resultado.modalidade}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Órgão Demandante</p>
-                    <p className="font-semibold print:text-black">{resultado.orgaoGerenciador}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 print:text-gray-600">Órgão Demandante</p>
+                    <p className="font-semibold text-sm print:text-black">{resultado.orgaoGerenciador}</p>
                   </div>
                   <div className="md:col-span-2">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Objeto</p>
-                    <p className="font-semibold print:text-black">{resultado.objeto}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 print:text-gray-600">Objeto</p>
+                    <p className="font-semibold text-sm print:text-black">{resultado.objeto}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 print:text-gray-600">Vigência Final</p>
-                    <p className="font-semibold print:text-black">{formatDate(resultado.vigenciaFinal)}</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 print:text-gray-600">Vigência Final</p>
+                    <p className="font-semibold text-sm print:text-black">{formatDate(resultado.vigenciaFinal)}</p>
                   </div>
                 </div>
               </div>
 
               {/* Resumo Financeiro */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="card bg-blue-50 dark:bg-blue-900/20 print:bg-white print:border">
-                  <div className="flex items-center gap-3 mb-2">
-                    <DollarSign size={24} className="text-blue-600 dark:text-blue-400 no-print" />
-                    <p className="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">Valor Total</p>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-2 print:gap-1">
+                <div className="card bg-blue-50 dark:bg-blue-900/20 print:bg-white print:border print:p-2">
+                  <div className="flex items-center gap-2 mb-1">
+                    <DollarSign size={16} className="text-blue-600 dark:text-blue-400 no-print" />
+                    <p className="text-xs text-gray-700 dark:text-gray-300 print:text-gray-700">Valor Total</p>
                   </div>
-                  <p className="text-2xl font-bold text-blue-700 dark:text-blue-400 print:text-black">
+                  <p className="text-lg font-bold text-blue-700 dark:text-blue-400 print:text-black print:text-base">
                     {formatCurrency(resultado.valorTotal)}
                   </p>
                 </div>
 
-                <div className="card bg-green-50 dark:bg-green-900/20 print:bg-white print:border">
-                  <div className="flex items-center gap-3 mb-2">
-                    <DollarSign size={24} className="text-green-600 dark:text-green-400 no-print" />
-                    <p className="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">Limite Global</p>
+                <div className="card bg-green-50 dark:bg-green-900/20 print:bg-white print:border print:p-2">
+                  <div className="flex items-center gap-2 mb-1">
+                    <DollarSign size={16} className="text-green-600 dark:text-green-400 no-print" />
+                    <p className="text-xs text-gray-700 dark:text-gray-300 print:text-gray-700">Limite Global</p>
                   </div>
-                  <p className="text-2xl font-bold text-green-700 dark:text-green-400 print:text-black">
+                  <p className="text-lg font-bold text-green-700 dark:text-green-400 print:text-black print:text-base">
                     {formatCurrency(resultado.valorAdesao)}
                   </p>
                 </div>
 
-                <div className="card bg-orange-50 dark:bg-orange-900/20 print:bg-white print:border">
-                  <div className="flex items-center gap-3 mb-2">
-                    <DollarSign size={24} className="text-orange-600 dark:text-orange-400 no-print" />
-                    <p className="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">Total Aderido</p>
+                <div className="card bg-orange-50 dark:bg-orange-900/20 print:bg-white print:border print:p-2">
+                  <div className="flex items-center gap-2 mb-1">
+                    <DollarSign size={16} className="text-orange-600 dark:text-orange-400 no-print" />
+                    <p className="text-xs text-gray-700 dark:text-gray-300 print:text-gray-700">Total Aderido</p>
                   </div>
-                  <p className="text-2xl font-bold text-orange-700 dark:text-orange-400 print:text-black">
+                  <p className="text-lg font-bold text-orange-700 dark:text-orange-400 print:text-black print:text-base">
                     {formatCurrency(resultado.totalAderido || 0)}
                   </p>
-                  <p className="text-sm mt-1 text-gray-600 dark:text-gray-400 print:text-gray-600">
+                  <p className="text-xs mt-0.5 text-gray-600 dark:text-gray-400 print:text-gray-600">
                     {percentualUtilizado.toFixed(1)}% do limite
                   </p>
                 </div>
 
-                <div className={`card ${percentualUtilizado > 80 ? 'bg-red-50 dark:bg-red-900/20' : 'bg-purple-50 dark:bg-purple-900/20'} print:bg-white print:border`}>
-                  <div className="flex items-center gap-3 mb-2">
-                    <DollarSign size={24} className={`${percentualUtilizado > 80 ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'} no-print`} />
-                    <p className="text-sm text-gray-700 dark:text-gray-300 print:text-gray-700">Saldo</p>
+                <div className={`card ${percentualUtilizado > 80 ? 'bg-red-50 dark:bg-red-900/20' : 'bg-purple-50 dark:bg-purple-900/20'} print:bg-white print:border print:p-2`}>
+                  <div className="flex items-center gap-2 mb-1">
+                    <DollarSign size={16} className={`${percentualUtilizado > 80 ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'} no-print`} />
+                    <p className="text-xs text-gray-700 dark:text-gray-300 print:text-gray-700">Saldo</p>
                   </div>
-                  <p className={`text-2xl font-bold ${percentualUtilizado > 80 ? 'text-red-700 dark:text-red-400' : 'text-purple-700 dark:text-purple-400'} print:text-black`}>
+                  <p className={`text-lg font-bold ${percentualUtilizado > 80 ? 'text-red-700 dark:text-red-400' : 'text-purple-700 dark:text-purple-400'} print:text-black print:text-base`}>
                     {formatCurrency(resultado.saldoDisponivel)}
                   </p>
-                  <p className="text-sm mt-1 text-gray-600 dark:text-gray-400 print:text-gray-600">
+                  <p className="text-xs mt-0.5 text-gray-600 dark:text-gray-400 print:text-gray-600">
                     {(100 - percentualUtilizado).toFixed(1)}% disponível
                   </p>
                 </div>
               </div>
 
               {/* Lista de Adesões */}
-              <div className="card print:shadow-none">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 print:text-black">
-                  <Building size={20} className="no-print" />
+              <div className="card print:shadow-none print:p-2">
+                <h3 className="text-sm font-semibold mb-2 flex items-center gap-2 print:text-black">
+                  <Building size={16} className="no-print" />
                   Adesões Realizadas ({resultado.adesoes.length})
                 </h3>
 
                 {resultado.adesoes.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500 dark:text-gray-400 print:text-gray-500">
+                  <div className="text-center py-4 text-sm text-gray-500 dark:text-gray-400 print:text-gray-500">
                     Nenhuma adesão registrada para esta ata
                   </div>
                 ) : (
