@@ -50,8 +50,8 @@ export function RelatorioAta({ ataId, isOpen, onClose }: RelatorioAtaProps) {
     : 0;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center no-print" id="relatorio-modal-overlay">
-      <div id="relatorio-modal-content" className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-6xl mx-4 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center no-print">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-6xl mx-4 max-h-[90vh] overflow-y-auto">
         {/* Header - não imprime */}
         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b dark:border-gray-700 p-4 flex items-center justify-between no-print z-10">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Relatório de Adesões</h2>
