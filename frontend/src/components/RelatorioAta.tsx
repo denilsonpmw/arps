@@ -55,22 +55,13 @@ export function RelatorioAta({ ataId, isOpen, onClose }: RelatorioAtaProps) {
         {/* Header - não imprime */}
         <div className="sticky top-0 bg-white dark:bg-gray-800 border-b dark:border-gray-700 p-4 flex items-center justify-between no-print z-10">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Relatório de Adesões</h2>
-          <div className="flex gap-2">
-            <button
-              onClick={handleImprimir}
-              className="btn btn-secondary flex items-center gap-2 text-sm"
-            >
-              <FileText size={16} />
-              Imprimir
-            </button>
-            <button
-              onClick={onClose}
-              className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
-              title="Fechar"
-            >
-              <X size={20} />
-            </button>
-          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            title="Fechar"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         {/* Content */}
