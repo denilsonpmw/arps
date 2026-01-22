@@ -53,11 +53,11 @@ export default function Dashboard() {
         <div className="card p-3 sm:p-4">
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-gray-500 text-xs sm:text-sm truncate">Atas Ativas</p>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{data.totalAtasAtivas}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm truncate">Atas Ativas</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{data.totalAtasAtivas}</p>
             </div>
-            <div className="bg-blue-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
-              <TrendingUp className="text-blue-600" size={20} />
+            <div className="bg-blue-100 dark:bg-blue-900/30 p-2 sm:p-3 rounded-lg flex-shrink-0">
+              <TrendingUp className="text-blue-600 dark:text-blue-400" size={20} />
             </div>
           </div>
         </div>
@@ -66,11 +66,11 @@ export default function Dashboard() {
         <div className="card p-3 sm:p-4">
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-gray-500 text-xs sm:text-sm truncate">Total Adesões</p>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{data.totalAdesoes}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm truncate">Total Adesões</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{data.totalAdesoes}</p>
             </div>
-            <div className="bg-purple-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
-              <CheckCircle className="text-purple-600" size={20} />
+            <div className="bg-purple-100 dark:bg-purple-900/30 p-2 sm:p-3 rounded-lg flex-shrink-0">
+              <CheckCircle className="text-purple-600 dark:text-purple-400" size={20} />
             </div>
           </div>
         </div>
@@ -79,11 +79,11 @@ export default function Dashboard() {
         <div className="card p-3 sm:p-4">
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-gray-500 text-xs sm:text-sm truncate">Saldo Crítico</p>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{data.atasComSaldoCritico}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm truncate">Saldo Crítico</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{data.atasComSaldoCritico}</p>
             </div>
-            <div className="bg-red-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
-              <AlertCircle className="text-red-600" size={20} />
+            <div className="bg-red-100 dark:bg-red-900/30 p-2 sm:p-3 rounded-lg flex-shrink-0">
+              <AlertCircle className="text-red-600 dark:text-red-400" size={20} />
             </div>
           </div>
         </div>
@@ -92,11 +92,11 @@ export default function Dashboard() {
         <div className="card p-3 sm:p-4">
           <div className="flex items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-gray-500 text-xs sm:text-sm truncate">Vigência Próxima</p>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-900">{data.adesoesvencendo}</p>
+              <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm truncate">Vigência Próxima</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">{data.adesoesvencendo}</p>
             </div>
-            <div className="bg-yellow-100 p-2 sm:p-3 rounded-lg flex-shrink-0">
-              <AlertTriangle className="text-yellow-600" size={20} />
+            <div className="bg-yellow-100 dark:bg-yellow-900/30 p-2 sm:p-3 rounded-lg flex-shrink-0">
+              <AlertTriangle className="text-yellow-600 dark:text-yellow-400" size={20} />
             </div>
           </div>
         </div>

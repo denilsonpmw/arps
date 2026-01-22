@@ -64,7 +64,7 @@ export default function Relatorios() {
               <input
                 type="text"
                 className="input"
-                placeholder="Ex: 00365-00008082/2024-42"
+                placeholder="Ex: 00000.0.062821/2025"
                 value={busca.nup}
                 onChange={(e) => setBusca({ ...busca, nup: e.target.value })}
               />
