@@ -119,14 +119,15 @@ export function FormAdesao({
   };
 
   const handleOrgaoAderenteChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const uppercasedEvent = {
+    const value = e.target.value.toUpperCase();
+    handleChange({
       ...e,
       target: {
         ...e.target,
-        value: e.target.value.toUpperCase()
+        name: 'orgaoAderente',
+        value: value
       }
-    };
-    handleChange(uppercasedEvent as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>);
+    } as React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>);
   };
 
   const maxValorAdesao = selectedAta ? (selectedAta.valorTotal * 0.5) : 0;
