@@ -18,6 +18,11 @@ import axios from 'axios';
 export async function syncFromExemploOutroSite() {
   const API_URL = process.env.WEBHOOK_ARPS_URL;
   const API_KEY = process.env.WEBHOOK_ARPS_KEY;
+  
+  console.log('[sync] Verificando configuração...');
+  console.log(`[sync] API_URL: ${API_URL ? 'configurado' : 'NÃO CONFIGURADO'}`);
+  console.log(`[sync] API_KEY: ${API_KEY ? `configurado (${API_KEY.substring(0, 10)}...)` : 'NÃO CONFIGURADO'}`);
+  
   if (!API_URL || !API_KEY) {
     console.error('[sync] API_URL ou API_KEY não configurados');
     return;
@@ -26,16 +31,23 @@ export async function syncFromExemploOutroSite() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let response: any;
   try {
+    console.log('[sync] Chamando API externa...');
     response = await axios.get(API_URL, {
       headers: { Authorization: `Bearer ${API_KEY}` },
       timeout: 15000,
     });
+    console.log(`[sync] Resposta HTTP: status ${response.status}`);
     if (response.status !== 200) {
       console.error(`[sync] Erro HTTP: status ${response.status}`);
       return;
     }
   } catch (err) {
     console.error('[sync] Erro de rede ao chamar API:', err);
+    if (axios.isAxiosError(err) && err.response) {
+      console.error(`[sync] Status: ${err.response.status}`);
+      console.error(`[sync] Headers enviados:`, err.config?.headers);
+      console.error(`[sync] Resposta:`, err.response.data);
+    }
     return;
   }
 
