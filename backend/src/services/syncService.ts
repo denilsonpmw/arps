@@ -47,8 +47,10 @@ export async function syncFromExemploOutroSite() {
     const error = err as any;
     if (error.response) {
       console.error(`[sync] Status: ${error.response.status}`);
-      console.error(`[sync] Headers enviados:`, error.config?.headers);
-      console.error(`[sync] Resposta:`, error.response.data);
+      console.error(`[sync] URL requisitada: ${error.config?.url}`);
+      console.error(`[sync] Method: ${error.config?.method}`);
+      console.error(`[sync] Headers enviados:`, JSON.stringify(error.config?.headers));
+      console.error(`[sync] Resposta:`, JSON.stringify(error.response.data));
     }
     return;
   }
