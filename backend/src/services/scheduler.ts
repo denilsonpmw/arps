@@ -21,7 +21,7 @@ export function startScheduler() {
   // Formato: minuto hora dia mês dia-da-semana
   const cronExpression = '*/5 * * * *';
 
-  const task = cron.schedule(cronExpression, async () => {
+  cron.schedule(cronExpression, async () => {
     console.log(`[scheduler] Iniciando sincronização agendada - ${new Date().toISOString()}`);
     try {
       await syncFromExemploOutroSite();
