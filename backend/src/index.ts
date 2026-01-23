@@ -12,6 +12,7 @@ import userRoutes from './routes/userRoutes';
 import setupRoutes from './routes/setupRoutes';
 import { authMiddleware } from './middleware/auth';
 import { syncFromExemploOutroSite } from './services/syncService';
+import { startScheduler } from './services/scheduler';
 
 dotenv.config();
 
@@ -22,6 +23,9 @@ const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:3000';
 // Middleware
 app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
+
+// Iniciar agendador de sincronização
+startScheduler();
 
 // Health check
 app.get('/health', (_req, res) => {
