@@ -58,6 +58,21 @@ app.post('/api/sync/manual', async (req, res) => {
   }
 });
 
+// Rota GET para sincronização manual via navegador (API key como query param)
+app.get('/api/sync/manual', async (req, res) => {
+  const apiKey = req.query.key as string;
+  const expectedKey = process.env.SYNC_API_KEY;
+  if (!expectedKey || apiKey !== expectedKey) {
+    return res.status(401).json({ success: false, error: { message: 'API key inválida ou ausente. Use ?key=SUA_API_KEY' } });
+  }
+  try {
+    await syncFromExemploOutroSite();
+    return res.json({ success: true, message: 'Sincronização disparada com sucesso!', timestamp: new Date().toISOString() });
+  } catch (e) {
+    return res.status(500).json({ success: false, error: { message: e instanceof Error ? e.message : 'Erro desconhecido' } });
+  }
+});
+
 // 404 handler
 app.use((_req, res) => {
   res.status(404).json({ success: false, error: { message: 'Rota não encontrada' } });
