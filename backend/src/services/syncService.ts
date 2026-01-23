@@ -28,20 +28,51 @@ export async function syncFromExemploOutroSite() {
     return;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let response: any;
+  // Buscar todos os registros (com paginação)
+  const todosRegistros: any[] = [];
+  let paginaAtual = 1;
+  let totalPaginas = 1;
+
   try {
     console.log('[sync] Chamando API externa...');
-    console.log(`[sync] URL completa: ${API_URL}`);
-    response = await axios.get(API_URL, {
-      headers: { 'x-api-key': API_KEY },
-      timeout: 15000,
-    });
-    console.log(`[sync] Resposta HTTP: status ${response.status}`);
-    if (response.status !== 200) {
-      console.error(`[sync] Erro HTTP: status ${response.status}`);
-      return;
+    
+    // Loop para buscar todas as páginas
+    while (paginaAtual <= totalPaginas) {
+      const urlComPaginacao = `${API_URL}${API_URL.includes('?') ? '&' : '?'}page=${paginaAtual}`;
+      console.log(`[sync] Buscando página ${paginaAtual}/${totalPaginas}: ${urlComPaginacao}`);
+      
+      const response = await axios.get(urlComPaginacao, {
+        headers: { 'x-api-key': API_KEY },
+        timeout: 15000,
+      });
+      
+      if (response.status !== 200) {
+        console.error(`[sync] Erro HTTP: status ${response.status}`);
+        break;
+      }
+
+      const registros = Array.isArray(response.data) ? response.data : response.data?.data;
+      if (!Array.isArray(registros)) {
+        console.error('[sync] Resposta da API não é um array');
+        break;
+      }
+
+      todosRegistros.push(...registros);
+      
+      // Atualiza total de páginas (se houver paginação)
+      if (response.data?.pagination) {
+        totalPaginas = response.data.pagination.totalPages || 1;
+        console.log(`[sync] Página ${paginaAtual}/${totalPaginas} - ${registros.length} registros`);
+      } else {
+        // Sem paginação, apenas uma página
+        break;
+      }
+      
+      paginaAtual++;
     }
+
+    console.log(`[sync] Total de registros obtidos: ${todosRegistros.length}`);
+    
   } catch (err) {
     console.error('[sync] Erro de rede ao chamar API:', err);
     const error = err as any;
@@ -62,11 +93,12 @@ export async function syncFromExemploOutroSite() {
     return;
   }
 
-  const registros = Array.isArray(response.data) ? response.data : response.data?.data;
-  if (!Array.isArray(registros)) {
-    console.error('[sync] Resposta da API não é um array');
+  if (todosRegistros.length === 0) {
+    console.log('[sync] Nenhum registro encontrado na API externa');
     return;
   }
+
+  const registros = todosRegistros;
 
   // Função para mapear dados da API externa para o formato do Prisma
   const mapearParaAta = (item: any) => {
