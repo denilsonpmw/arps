@@ -99,11 +99,11 @@ export async function syncFromExemploOutroSite() {
   const results = await prisma.$transaction(async (tx) => {
     const logs: string[] = [];
     for (const item of registros) {
-      // Usa o 'id' da API externa como source_id
-      const source_id = String(item.id);
+      // Usa o 'nup' da API externa como source_id (identificador único entre sistemas)
+      const source_id = item.nup;
       
       if (!source_id) {
-        logs.push(`[sync] Ignorado: registro sem id`);
+        logs.push(`[sync] Ignorado: registro sem nup`);
         continue;
       }
       try {
