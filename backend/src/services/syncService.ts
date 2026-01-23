@@ -36,7 +36,6 @@ export async function syncFromExemploOutroSite() {
     response = await axios.get(API_URL, {
       headers: { 'x-api-key': API_KEY },
       timeout: 15000,
-      maxRedirects: 0, // Não seguir redirects
     });
     console.log(`[sync] Resposta HTTP: status ${response.status}`);
     if (response.status !== 200) {
