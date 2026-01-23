@@ -45,12 +45,19 @@ export async function syncFromExemploOutroSite() {
   } catch (err) {
     console.error('[sync] Erro de rede ao chamar API:', err);
     const error = err as any;
+    console.error('[sync] Tipo de erro:', error?.name);
+    console.error('[sync] Mensagem:', error?.message);
+    console.error('[sync] Tem response?', !!error.response);
     if (error.response) {
       console.error(`[sync] Status: ${error.response.status}`);
       console.error(`[sync] URL requisitada: ${error.config?.url}`);
       console.error(`[sync] Method: ${error.config?.method}`);
-      console.error(`[sync] Headers enviados:`, JSON.stringify(error.config?.headers));
-      console.error(`[sync] Resposta:`, JSON.stringify(error.response.data));
+      console.error(`[sync] Headers enviados:`, JSON.stringify(error.config?.headers, null, 2));
+      console.error(`[sync] Resposta:`, JSON.stringify(error.response.data, null, 2));
+    }
+    if (error.config) {
+      console.error('[sync] Config URL:', error.config.url);
+      console.error('[sync] Config headers:', JSON.stringify(error.config.headers, null, 2));
     }
     return;
   }
@@ -65,9 +72,12 @@ export async function syncFromExemploOutroSite() {
   const results = await prisma.$transaction(async (tx) => {
     const logs: string[] = [];
     for (const item of registros) {
-      const { source_id, deleted, ...dados } = item;
+      // Usa o 'id' da API externa como source_id
+      const { id, deleted, ...dados } = item;
+      const source_id = String(id); // Garante que é string
+      
       if (!source_id) {
-        logs.push(`[sync] Ignorado: registro sem source_id`);
+        logs.push(`[sync] Ignorado: registro sem id`);
         continue;
       }
       try {
