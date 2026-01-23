@@ -16,8 +16,8 @@ import axios from 'axios';
  * - Loga sucesso/erro de cada etapa
  */
 export async function syncFromExemploOutroSite() {
-  const API_URL = process.env.EXEMPLO_OUTRO_SITE_URL;
-  const API_KEY = process.env.EXEMPLO_OUTRO_SITE_KEY;
+  const API_URL = process.env.WEBHOOK_ARPS_URL;
+  const API_KEY = process.env.WEBHOOK_ARPS_KEY;
   if (!API_URL || !API_KEY) {
     console.error('[sync] API_URL ou API_KEY não configurados');
     return;
