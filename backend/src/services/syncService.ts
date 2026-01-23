@@ -33,7 +33,7 @@ export async function syncFromExemploOutroSite() {
   try {
     console.log('[sync] Chamando API externa...');
     response = await axios.get(API_URL, {
-      headers: { Authorization: `Bearer ${API_KEY}` },
+      headers: { 'x-api-key': API_KEY },
       timeout: 15000,
     });
     console.log(`[sync] Resposta HTTP: status ${response.status}`);
