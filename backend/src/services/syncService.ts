@@ -43,10 +43,11 @@ export async function syncFromExemploOutroSite() {
     }
   } catch (err) {
     console.error('[sync] Erro de rede ao chamar API:', err);
-    if (axios.isAxiosError(err) && err.response) {
-      console.error(`[sync] Status: ${err.response.status}`);
-      console.error(`[sync] Headers enviados:`, err.config?.headers);
-      console.error(`[sync] Resposta:`, err.response.data);
+    const error = err as any;
+    if (error.response) {
+      console.error(`[sync] Status: ${error.response.status}`);
+      console.error(`[sync] Headers enviados:`, error.config?.headers);
+      console.error(`[sync] Resposta:`, error.response.data);
     }
     return;
   }
