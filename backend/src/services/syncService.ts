@@ -68,29 +68,65 @@ export async function syncFromExemploOutroSite() {
     return;
   }
 
+  // Função para mapear dados da API externa para o formato do Prisma
+  const mapearParaAta = (item: any) => {
+    // Extrai sigla do órgão
+    const orgao = item.unidade_gestora?.sigla || 'N/A';
+    
+    // Monta modalidade no formato "SIGLA NNN/AAAA"
+    const modalidade = item.modalidade?.sigla_modalidade 
+      ? `${item.modalidade.sigla_modalidade} ${item.numero_ano || ''}`
+      : item.numero_ano || 'N/A';
+    
+    // Valor realizado (homologado)
+    const valorTotal = item.valor_realizado || 0;
+    
+    return {
+      nup: item.nup,
+      modalidade: modalidade.trim(),
+      arpNumero: null, // API externa não tem esse campo
+      orgaoGerenciador: orgao,
+      objeto: item.objeto || 'Sem descrição',
+      vigenciaFinal: null, // API externa não tem esse campo
+      valorTotal: valorTotal,
+      valorAdesao: valorTotal * 2, // 200% do valor total
+      saldoDisponivel: valorTotal * 2, // Inicialmente todo disponível
+      ativa: item.situacao?.eh_finalizadora ? true : false,
+    };
+  };
+
   // Inicia transação
   const results = await prisma.$transaction(async (tx) => {
     const logs: string[] = [];
     for (const item of registros) {
       // Usa o 'id' da API externa como source_id
-      const { id, deleted, ...dados } = item;
-      const source_id = String(id); // Garante que é string
+      const source_id = String(item.id);
       
       if (!source_id) {
         logs.push(`[sync] Ignorado: registro sem id`);
         continue;
       }
       try {
+        // Mapeia os dados para o formato do Prisma
+        const dadosMapeados = mapearParaAta(item);
+        
         // Busca registro local
         const local = await tx.ata.findUnique({ where: { source_id } });
         if (!local) {
           // INSERT
-          await tx.ata.create({ data: { ...dados, source_id, updated_at_source: new Date(), deleted_at: deleted ? new Date() : null } });
-          logs.push(`[sync] Inserido novo registro source_id=${source_id}`);
+          await tx.ata.create({ 
+            data: { 
+              ...dadosMapeados, 
+              source_id, 
+              updated_at_source: new Date(), 
+              deleted_at: item.deleted ? new Date() : null 
+            } 
+          });
+          logs.push(`[sync] Inserido novo registro source_id=${source_id} nup=${item.nup}`);
         } else if (local.local_override) {
           // NÃO atualiza nada
           logs.push(`[sync] Mantido local_override=true source_id=${source_id}`);
-        } else if (deleted) {
+        } else if (item.deleted) {
           // Soft delete se permitido
           if (!local.deleted_at) {
             await tx.ata.update({ where: { source_id }, data: { deleted_at: new Date(), updated_at_source: new Date() } });
@@ -100,8 +136,15 @@ export async function syncFromExemploOutroSite() {
           }
         } else {
           // UPDATE
-          await tx.ata.update({ where: { source_id }, data: { ...dados, updated_at_source: new Date(), deleted_at: null } });
-          logs.push(`[sync] Atualizado source_id=${source_id}`);
+          await tx.ata.update({ 
+            where: { source_id }, 
+            data: { 
+              ...dadosMapeados, 
+              updated_at_source: new Date(), 
+              deleted_at: null 
+            } 
+          });
+          logs.push(`[sync] Atualizado source_id=${source_id} nup=${item.nup}`);
         }
       } catch (e) {
         logs.push(`[sync] Erro ao processar source_id=${source_id}: ${e instanceof Error ? e.message : e}`);
