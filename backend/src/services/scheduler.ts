@@ -21,7 +21,7 @@ export function startScheduler() {
   // Formato: minuto hora dia mês dia-da-semana
   const cronExpression = '*/5 * * * *';
 
-  cron.schedule(cronExpression, async () => {
+  const task = cron.schedule(cronExpression, async () => {
     console.log(`[scheduler] Iniciando sincronização agendada - ${new Date().toISOString()}`);
     try {
       await syncFromExemploOutroSite();
@@ -32,4 +32,16 @@ export function startScheduler() {
   });
 
   console.log(`[scheduler] Agendador iniciado: sincronização a cada 5 minutos`);
+  console.log(`[scheduler] Próxima execução em até 5 minutos...`);
+  
+  // Executar uma vez imediatamente ao iniciar (após 10 segundos)
+  setTimeout(async () => {
+    console.log(`[scheduler] Executando primeira sincronização - ${new Date().toISOString()}`);
+    try {
+      await syncFromExemploOutroSite();
+      console.log(`[scheduler] Primeira sincronização concluída - ${new Date().toISOString()}`);
+    } catch (error) {
+      console.error('[scheduler] Erro na primeira sincronização:', error);
+    }
+  }, 10000);
 }
