@@ -42,3 +42,39 @@ export const createInitialAdmin = async (_req: Request, res: Response) => {
     });
   }
 };
+
+export const updateLocalOverride = async (_req: Request, res: Response) => {
+  try {
+    // Atualiza local_override=true onde arpNumero tem valor
+    const result = await prisma.$executeRaw`
+      UPDATE "Ata" 
+      SET local_override = true 
+      WHERE "arpNumero" IS NOT NULL 
+        AND "arpNumero" != ''
+        AND local_override = false
+    `;
+
+    // Conta quantos registros agora têm local_override=true
+    const count = await prisma.ata.count({
+      where: {
+        arpNumero: { not: null },
+        local_override: true
+      }
+    });
+
+    res.json({
+      success: true,
+      message: 'Local override atualizado com sucesso',
+      data: { 
+        registrosAtualizados: Number(result),
+        totalComLocalOverride: count
+      }
+    });
+  } catch (error) {
+    console.error('Erro ao atualizar local_override:', error);
+    res.status(500).json({
+      success: false,
+      error: { message: 'Erro ao atualizar local_override' }
+    });
+  }
+};

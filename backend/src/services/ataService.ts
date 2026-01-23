@@ -54,6 +54,11 @@ export class AtaService {
 
     const updateData: any = { ...data };
 
+    // Se arpNumero foi preenchido, marca local_override = true
+    if (data.arpNumero && data.arpNumero.trim() !== '') {
+      updateData.local_override = true;
+    }
+
     // Se o valor total foi atualizado, recalcular valor de adesão
     if (data.valorTotal && data.valorTotal !== ata.valorTotal.toNumber()) {
       const novoValorAdesao = calcularValorAdesao(data.valorTotal);
