@@ -9,8 +9,11 @@ export function startScheduler() {
   // Validar se o agendamento deve ser ativado
   const ENABLE_SCHEDULER = process.env.ENABLE_SYNC_SCHEDULER === 'true';
   
+  console.log(`[scheduler] ENABLE_SYNC_SCHEDULER = ${process.env.ENABLE_SYNC_SCHEDULER}`);
+  console.log(`[scheduler] Agendador ${ENABLE_SCHEDULER ? 'HABILITADO' : 'DESABILITADO'}`);
+  
   if (!ENABLE_SCHEDULER) {
-    console.log('[scheduler] Agendador de sincronização desabilitado. Configure ENABLE_SYNC_SCHEDULER=true para ativar.');
+    console.log('[scheduler] Configure ENABLE_SYNC_SCHEDULER=true para ativar o agendador automático.');
     return;
   }
 
