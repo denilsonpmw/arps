@@ -41,7 +41,8 @@ export async function syncFromExemploOutroSite() {
       const urlComPaginacao = `${API_URL}${API_URL.includes('?') ? '&' : '?'}page=${paginaAtual}`;
       console.log(`[sync] Buscando página ${paginaAtual}/${totalPaginas}: ${urlComPaginacao}`);
       
-      const response = await axios.get(urlComPaginacao, {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const response: any = await axios.get(urlComPaginacao, {
         headers: { 'x-api-key': API_KEY },
         timeout: 15000,
       });
