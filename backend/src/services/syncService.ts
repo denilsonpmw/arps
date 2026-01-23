@@ -110,10 +110,25 @@ export async function syncFromExemploOutroSite() {
         // Mapeia os dados para o formato do Prisma
         const dadosMapeados = mapearParaAta(item);
         
-        // Busca registro local
-        const local = await tx.ata.findUnique({ where: { source_id } });
+        // Busca registro local por source_id
+        let local = await tx.ata.findUnique({ where: { source_id } });
+        
+        // Se não encontrou por source_id, verifica se existe por nup
         if (!local) {
-          // INSERT
+          const porNup = await tx.ata.findUnique({ where: { nup: dadosMapeados.nup } });
+          if (porNup) {
+            // Encontrou registro local com mesmo NUP mas sem source_id
+            // Vincula o source_id ao registro existente
+            local = await tx.ata.update({
+              where: { id: porNup.id },
+              data: { source_id, updated_at_source: new Date() }
+            });
+            logs.push(`[sync] Vinculado source_id ao registro existente nup=${dadosMapeados.nup}`);
+          }
+        }
+        
+        if (!local) {
+          // INSERT - novo registro
           await tx.ata.create({ 
             data: { 
               ...dadosMapeados, 
