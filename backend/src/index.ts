@@ -11,6 +11,21 @@ import importRoutes from './routes/importRoutes';
 import userRoutes from './routes/userRoutes';
 import setupRoutes from './routes/setupRoutes';
 import { authMiddleware } from './middleware/auth';
+import { syncFromExemploOutroSite } from './services/syncService';
+// Rota para disparar sincronização manualmente via API key
+app.post('/api/sync/manual', async (req, res) => {
+  const apiKey = req.header('x-api-key');
+  const expectedKey = process.env.SYNC_API_KEY;
+  if (!expectedKey || apiKey !== expectedKey) {
+    return res.status(401).json({ success: false, error: { message: 'API key inválida' } });
+  }
+  try {
+    await syncFromExemploOutroSite();
+    res.json({ success: true, message: 'Sincronização disparada. Veja logs do servidor para detalhes.' });
+  } catch (e) {
+    res.status(500).json({ success: false, error: { message: e instanceof Error ? e.message : 'Erro desconhecido' } });
+  }
+});
 
 dotenv.config();
 

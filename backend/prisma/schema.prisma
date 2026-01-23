@@ -35,9 +35,15 @@ model Ata {
   valorAdesao       Decimal     // Limite global: VALOR_TOTAL * 2 (200%) - Lei 14.133/2021
   saldoDisponivel   Decimal     // VALOR_ADESAO - soma de todas as adesões
   ativa             Boolean     @default(true)
-  
+
+  // Campos para integração/sincronização externa
+  source_id         String?     @unique
+  local_override    Boolean     @default(false)
+  deleted_at        DateTime?
+  updated_at_source DateTime?
+
   adesoes           Adesao[]
-  
+
   criadoEm          DateTime    @default(now())
   atualizadoEm      DateTime    @updatedAt
 
