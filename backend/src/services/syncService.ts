@@ -23,7 +23,8 @@ export async function syncFromExemploOutroSite() {
     return;
   }
 
-  let response;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let response: any;
   try {
     response = await axios.get(API_URL, {
       headers: { Authorization: `Bearer ${API_KEY}` },
