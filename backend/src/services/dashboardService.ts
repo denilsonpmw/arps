@@ -34,6 +34,14 @@ export class DashboardService {
       isVigenciaAtencao(ata.vigenciaFinal)
     );
 
+    // Ordena por vigência: datas mais próximas primeiro (ascendente)
+    atasComAlerta.sort((a, b) => {
+      if (!a.vigenciaFinal && !b.vigenciaFinal) return 0;
+      if (!a.vigenciaFinal) return 1; // Sem vigência vai pro final
+      if (!b.vigenciaFinal) return -1;
+      return a.vigenciaFinal.getTime() - b.vigenciaFinal.getTime();
+    });
+
     return {
       totalAtasAtivas,
       saldoTotalDisponivel,
