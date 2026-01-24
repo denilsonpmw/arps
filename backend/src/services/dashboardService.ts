@@ -1,5 +1,5 @@
 import { prisma } from '../lib/prisma';
-import { isSaldoCritico, isVigenciaProxima } from '../utils/calculos';
+import { isSaldoCritico, isVigenciaProxima, isVigenciaAtencao } from '../utils/calculos';
 
 export class DashboardService {
   static async getDashboardData() {
@@ -27,9 +27,11 @@ export class DashboardService {
       isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao)
     );
 
-    // Atas com alerta (saldo crítico OU vigência próxima)
+    // Atas com alerta (saldo crítico OU vigência próxima OU vigência até 6 meses)
     const atasComAlerta = atas.filter((ata) => 
-      isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao) || isVigenciaProxima(ata.vigenciaFinal)
+      isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao) || 
+      isVigenciaProxima(ata.vigenciaFinal) ||
+      isVigenciaAtencao(ata.vigenciaFinal)
     );
 
     return {

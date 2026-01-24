@@ -58,6 +58,24 @@ export function isVigenciaProxima(vigenciaFinal: Date | null): boolean {
 }
 
 /**
+ * Verifica se a vigência termina nos próximos 6 meses (para alertas de atenção)
+ */
+export function isVigenciaAtencao(vigenciaFinal: Date | null): boolean {
+  if (!vigenciaFinal) return false;
+  
+  const hoje = new Date();
+  const agora = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+  const fim = new Date(vigenciaFinal.getFullYear(), vigenciaFinal.getMonth(), vigenciaFinal.getDate());
+  
+  // Calcula a data daqui a 6 meses
+  const seisMesesFrente = new Date(agora);
+  seisMesesFrente.setMonth(agora.getMonth() + 6);
+  
+  // Verifica se a vigência final está entre hoje e 6 meses à frente
+  return fim >= agora && fim <= seisMesesFrente;
+}
+
+/**
  * Valida se a adesão pode ser realizada
  */
 export interface ValidacaoAdesao {
