@@ -48,17 +48,21 @@ export class DashboardService {
       totalAdesoes,
       adesoesvencendo,
       atasComSaldoCritico: atasComSaldoCritico.length,
-      atasAlerta: atasComAlerta.map((ata) => ({
-        id: ata.id,
-        arpNumero: ata.arpNumero,
-        orgaoGerenciador: ata.orgaoGerenciador,
-        objeto: ata.objeto,
-        vigenciaFinal: ata.vigenciaFinal,
-        valorAdesao: ata.valorAdesao.toNumber(),
-        saldoDisponivel: ata.saldoDisponivel.toNumber(),
-        saldoCritico: isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao),
-        vigenciaProxima: isVigenciaProxima(ata.vigenciaFinal),
-      })),
+      atasAlerta: atasComAlerta.map((ata) => {
+        const totalAderido = ata.adesoes.reduce((sum, adesao) => sum + adesao.valorAderido.toNumber(), 0);
+        return {
+          id: ata.id,
+          arpNumero: ata.arpNumero,
+          orgaoGerenciador: ata.orgaoGerenciador,
+          objeto: ata.objeto,
+          vigenciaFinal: ata.vigenciaFinal,
+          valorAdesao: ata.valorAdesao.toNumber(),
+          totalAderido: totalAderido,
+          saldoDisponivel: ata.saldoDisponivel.toNumber(),
+          saldoCritico: isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao),
+          vigenciaProxima: isVigenciaProxima(ata.vigenciaFinal),
+        };
+      }),
     };
   }
 
