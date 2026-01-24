@@ -143,6 +143,8 @@ export default function Dashboard() {
                   <th className="text-left px-0.5">Objeto</th>
                   <th className="text-center px-0.5 w-18">Vigência</th>
                   <th className="text-right px-0.5 w-20">Limite</th>
+                  <th className="text-center px-0.5 w-12">Qtd</th>
+                  <th className="text-right px-0.5 w-20">Aderido</th>
                   <th className="text-right px-0.5 w-20">Saldo</th>
                   <th className="text-center px-0.5 w-18">Status</th>
                 </tr>
@@ -155,6 +157,8 @@ export default function Dashboard() {
                     <td className="px-0.5 truncate max-w-xs" title={ata.objeto}>{ata.objeto}</td>
                     <td className="text-center px-0.5">{formatDate(ata.vigenciaFinal)}</td>
                     <td className="text-right px-0.5 font-mono">{formatCurrency(ata.valorAdesao)}</td>
+                    <td className="text-center px-0.5 font-mono">{ata.quantidadeAdesoes}</td>
+                    <td className="text-right px-0.5 font-mono">{formatCurrency(ata.totalAderido)}</td>
                     <td className={`text-right px-0.5 font-mono ${ata.saldoCritico ? 'text-red-600 font-bold' : ''}`}>
                       {formatCurrency(ata.saldoDisponivel)}
                     </td>

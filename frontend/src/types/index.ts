@@ -42,11 +42,13 @@ export interface AtaAlerta {
   arpNumero: string;
   orgaoGerenciador: string;
   objeto: string;
+  valorAdesao: number;
+  quantidadeAdesoes: number;
+  totalAderido: number;
   saldoDisponivel: number;
   saldoCritico: boolean;
   vigenciaProxima: boolean;
   vigenciaFinal: string;
-  valorAdesao: number;
 }
 
 export interface CreateAtaInput {

@@ -50,6 +50,7 @@ export class DashboardService {
       atasComSaldoCritico: atasComSaldoCritico.length,
       atasAlerta: atasComAlerta.map((ata) => {
         const totalAderido = ata.adesoes.reduce((sum, adesao) => sum + adesao.valorAderido.toNumber(), 0);
+        const quantidadeAdesoes = ata.adesoes.length;
         return {
           id: ata.id,
           arpNumero: ata.arpNumero,
@@ -57,6 +58,7 @@ export class DashboardService {
           objeto: ata.objeto,
           vigenciaFinal: ata.vigenciaFinal,
           valorAdesao: ata.valorAdesao.toNumber(),
+          quantidadeAdesoes: quantidadeAdesoes,
           totalAderido: totalAderido,
           saldoDisponivel: ata.saldoDisponivel.toNumber(),
           saldoCritico: isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao),
