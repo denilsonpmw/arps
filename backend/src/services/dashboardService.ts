@@ -18,7 +18,7 @@ export class DashboardService {
     const saldoTotalDisponivel = atas.reduce((sum, ata) => sum + ata.saldoDisponivel.toNumber(), 0);
     const totalAdesoes = atas.reduce((sum, ata) => sum + ata.adesoes.length, 0);
 
-    // Atas com vigência próxima (vencendo nos próximos 2 meses)
+    // Atas com vigência próxima (vencendo nos próximos 3 meses)
     const atasVencendo = atas.filter((ata) => isVigenciaProxima(ata.vigenciaFinal));
     const adesoesvencendo = atasVencendo.length;
 
