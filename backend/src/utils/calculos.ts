@@ -40,7 +40,7 @@ export function isSaldoCritico(saldoDisponivel: number | Decimal, valorAdesao: n
 }
 
 /**
- * Verifica se a vigência termina nos próximos 4 meses (incluindo o mês atual)
+ * Verifica se a vigência termina nos próximos 2 meses (incluindo o mês atual)
  */
 export function isVigenciaProxima(vigenciaFinal: Date | null): boolean {
   if (!vigenciaFinal) return false;
@@ -49,12 +49,12 @@ export function isVigenciaProxima(vigenciaFinal: Date | null): boolean {
   const agora = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
   const fim = new Date(vigenciaFinal.getFullYear(), vigenciaFinal.getMonth(), vigenciaFinal.getDate());
   
-  // Calcula a data daqui a 4 meses
-  const quatroMesesFrente = new Date(agora);
-  quatroMesesFrente.setMonth(agora.getMonth() + 4);
+  // Calcula a data daqui a 2 meses
+  const doisMesesFrente = new Date(agora);
+  doisMesesFrente.setMonth(agora.getMonth() + 2);
   
-  // Verifica se a vigência final está entre hoje e 4 meses à frente
-  return fim >= agora && fim <= quatroMesesFrente;
+  // Verifica se a vigência final está entre hoje e 2 meses à frente
+  return fim >= agora && fim <= doisMesesFrente;
 }
 
 /**
