@@ -31,16 +31,16 @@ export function calcularSaldoDisponivel(
 }
 
 /**
- * Verifica se a ata está com saldo critico (abaixo de 20%)
+ * Verifica se a ata está com saldo critico (abaixo de 30%)
  */
 export function isSaldoCritico(saldoDisponivel: number | Decimal, valorAdesao: number | Decimal): boolean {
   const saldo = typeof saldoDisponivel === 'number' ? saldoDisponivel : saldoDisponivel.toNumber();
   const adesao = typeof valorAdesao === 'number' ? valorAdesao : valorAdesao.toNumber();
-  return saldo < (adesao * 0.2);
+  return saldo < (adesao * 0.3);
 }
 
 /**
- * Verifica se a vigência é no mês atual
+ * Verifica se a vigência termina nos próximos 4 meses (incluindo o mês atual)
  */
 export function isVigenciaProxima(vigenciaFinal: Date | null): boolean {
   if (!vigenciaFinal) return false;
@@ -49,8 +49,12 @@ export function isVigenciaProxima(vigenciaFinal: Date | null): boolean {
   const agora = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
   const fim = new Date(vigenciaFinal.getFullYear(), vigenciaFinal.getMonth(), vigenciaFinal.getDate());
   
-  // Verifica se está no mesmo mês e ano
-  return agora.getFullYear() === fim.getFullYear() && agora.getMonth() === fim.getMonth();
+  // Calcula a data daqui a 4 meses
+  const quatroMesesFrente = new Date(agora);
+  quatroMesesFrente.setMonth(agora.getMonth() + 4);
+  
+  // Verifica se a vigência final está entre hoje e 4 meses à frente
+  return fim >= agora && fim <= quatroMesesFrente;
 }
 
 /**

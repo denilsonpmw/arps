@@ -18,11 +18,11 @@ export class DashboardService {
     const saldoTotalDisponivel = atas.reduce((sum, ata) => sum + ata.saldoDisponivel.toNumber(), 0);
     const totalAdesoes = atas.reduce((sum, ata) => sum + ata.adesoes.length, 0);
 
-    // Atas com vigência próxima (vencendo no mês atual)
+    // Atas com vigência próxima (vencendo nos próximos 4 meses)
     const atasVencendo = atas.filter((ata) => isVigenciaProxima(ata.vigenciaFinal));
     const adesoesvencendo = atasVencendo.length;
 
-    // Atas com saldo crítico (< 20%)
+    // Atas com saldo crítico (< 30%)
     const atasComSaldoCritico = atas.filter((ata) =>
       isSaldoCritico(ata.saldoDisponivel, ata.valorAdesao)
     );
