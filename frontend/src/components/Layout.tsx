@@ -107,7 +107,7 @@ export default function Layout({ children, currentPage, onPageChange }: LayoutPr
         <header className="bg-white dark:bg-gray-800 shadow dark:shadow-gray-900">
           <div className="px-3 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
             <div>
-              <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">ARPS-SUPEL</h2>
+              <h2 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white">ARP's-SUPEL</h2>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 truncate">Sistema de Controle de Adesões</p>
             </div>
             {user && (
