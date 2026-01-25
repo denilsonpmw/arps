@@ -100,7 +100,6 @@ export function FormAdesao({
     } else if (!isOpen) {
       reset();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, initialData, propAta]);
 
   // Atualiza selectedAta quando ataId muda
@@ -210,7 +209,7 @@ export function FormAdesao({
           onChange={handleOrgaoAderenteChange}
           error={errors.orgaoAderente}
           required
-          maxLength={10}
+          maxLength={30}
         />
 
         <FormField
@@ -230,7 +229,7 @@ export function FormAdesao({
           <div>
             {isValorExcedido && (
               <div className="alert alert-danger text-sm mb-2">
-                ⚠️ Valor não pode exceder 50% do valor total ({formatCurrency(maxValorAdesao)})
+                ⚠️ Valor não pode exceder 50% do Valor Total, o máximo por adesão é: ({formatCurrency(maxValorAdesao)})
               </div>
             )}
             {isSaldoInsuficiente && (

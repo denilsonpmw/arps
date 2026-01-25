@@ -18,7 +18,7 @@ export const updateAtaSchema = createAtaSchema.partial();
 export const createAdesaoSchema = z.object({
   ataId: z.string().min(1, 'Ata é obrigatória'),
   numeroIdentificador: z.string().min(1, 'Número identificador é obrigatório'),
-  orgaoAderente: z.string().min(1, 'Órgão aderente é obrigatório').max(15),
+  orgaoAderente: z.string().min(1, 'Órgão aderente é obrigatório').max(30),
   valorAderido: z.coerce.number().min(0.01, 'Valor aderido deve ser maior que 0'),
 });
 

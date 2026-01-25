@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const CreateAdesaoSchema = z.object({
   ataId: z.string().min(1, 'ID da ata é obrigatório'),
   numeroIdentificador: z.string().min(1, 'Número identificador é obrigatório'),
-  orgaoAderente: z.string().min(1, 'Órgão aderente é obrigatório'),
+  orgaoAderente: z.string().min(1, 'Órgão aderente é obrigatório').max(30),
   valorAderido: z.coerce.number().positive('Valor aderido deve ser positivo'),
 });
 
