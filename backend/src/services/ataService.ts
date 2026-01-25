@@ -52,7 +52,7 @@ export class AtaService {
     const ata = await prisma.ata.findUnique({ where: { id } });
     if (!ata) throw new Error('Ata não encontrada');
 
-    const updateData: any = { ...data };
+    const updateData: Partial<UpdateAtaInput & { local_override: boolean; valorAdesao: number; saldoDisponivel: number }> = { ...data };
 
     // Se arpNumero foi preenchido, marca local_override = true
     if (data.arpNumero && data.arpNumero.trim() !== '') {

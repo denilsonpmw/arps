@@ -1,6 +1,25 @@
 import { prisma } from '../lib/prisma';
 import axios from 'axios';
 
+interface ApiExternaItem {
+  id: number;
+  nup: string;
+  objeto: string;
+  deleted?: boolean;
+  unidade_gestora?: { sigla: string };
+  modalidade?: { sigla_modalidade: string };
+  numero_ano?: string;
+  valor_realizado?: number;
+  situacao?: { eh_finalizadora: boolean };
+}
+
+interface ApiResponse {
+  data?: ApiExternaItem[];
+  pagination?: {
+    totalPages: number;
+  };
+}
+
 /**
  * Sincroniza registros do outro site via API REST.
  * - Executa de forma programada (ex: via cron ou scheduler externo)
@@ -29,7 +48,7 @@ export async function syncFromExemploOutroSite() {
   }
 
   // Buscar todos os registros (com paginação)
-  const todosRegistros: any[] = [];
+  const todosRegistros: ApiExternaItem[] = [];
   let paginaAtual = 1;
   let totalPaginas = 1;
 
@@ -41,8 +60,7 @@ export async function syncFromExemploOutroSite() {
       const urlComPaginacao = `${API_URL}${API_URL.includes('?') ? '&' : '?'}page=${paginaAtual}`;
       console.log(`[sync] Buscando página ${paginaAtual}/${totalPaginas}: ${urlComPaginacao}`);
       
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const response: any = await axios.get(urlComPaginacao, {
+      const response = await axios.get<ApiResponse>(urlComPaginacao, {
         headers: { 'x-api-key': API_KEY },
         timeout: 15000,
       });
@@ -76,7 +94,7 @@ export async function syncFromExemploOutroSite() {
     
   } catch (err) {
     console.error('[sync] Erro de rede ao chamar API:', err);
-    const error = err as any;
+    const error = err as { response?: { status: number; data: unknown }; config?: { url?: string; method?: string; headers?: Record<string, string> }; name?: string; message?: string };
     console.error('[sync] Tipo de erro:', error?.name);
     console.error('[sync] Mensagem:', error?.message);
     console.error('[sync] Tem response?', !!error.response);
@@ -102,7 +120,7 @@ export async function syncFromExemploOutroSite() {
   const registros = todosRegistros;
 
   // Função para mapear dados da API externa para o formato do Prisma
-  const mapearParaAta = (item: any) => {
+  const mapearParaAta = (item: ApiExternaItem) => {
     // Extrai sigla do órgão
     const orgao = item.unidade_gestora?.sigla || 'N/A';
     

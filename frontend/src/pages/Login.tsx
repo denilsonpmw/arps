@@ -16,8 +16,8 @@ export default function Login() {
 
     try {
       await login(email, password);
-    } catch (err: any) {
-      setError(err.message || 'Erro ao fazer login');
+    } catch (err: unknown) {
+      setError((err as Error).message || 'Erro ao fazer login');
     } finally {
       setLoading(false);
     }

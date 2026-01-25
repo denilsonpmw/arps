@@ -112,7 +112,7 @@ export const updateUser = asyncHandler(async (req: AuthRequest, res: Response, _
   }
 
   // Preparar dados para atualização
-  const updateData: any = {};
+  const updateData: { name?: string; email?: string; password?: string; role?: string } = {};
   if (email) updateData.email = email;
   if (name) updateData.name = name;
   if (role) updateData.role = role;
