@@ -1,6 +1,6 @@
-## 📋 DOCUMENTAÇÃO - ARPS-SUPEL
+## 📋 DOCUMENTAÇÃO - ARP's-SUPEL
 
-Bem-vindo ao **ARPS-SUPEL** - Sistema de Controle de Adesões a Atas de Registro de Preços!
+Bem-vindo ao **ARP's-SUPEL** - Sistema de Controle de Adesões a Atas de Registro de Preços!
 
 Este documento organiza toda a documentação do projeto. Escolha o que você precisa:
 

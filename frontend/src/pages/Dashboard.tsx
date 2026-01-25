@@ -138,13 +138,13 @@ export default function Dashboard() {
             <table className="table table-compact text-xs w-full">
               <thead>
                 <tr className="bg-yellow-50">
-                  <th className="text-left px-0.5 w-14">ARP</th>
+                  <th className="text-left px-0.5 w-14">ARP Nº</th>
                   <th className="text-left px-0.5 w-20">Órgão</th>
                   <th className="text-left px-0.5">Objeto</th>
                   <th className="text-center px-0.5 w-18">Vigência</th>
-                  <th className="text-right px-0.5 w-20">Limite</th>
-                  <th className="text-center px-0.5 w-12">Qtd</th>
-                  <th className="text-right px-0.5 w-20">Aderido</th>
+                  <th className="text-right px-0.5 w-20">Limite Global</th>
+                  <th className="text-center px-0.5 w-12">Qtd. Adesões</th>
+                  <th className="text-right px-0.5 w-20">Total Aderido</th>
                   <th className="text-right px-0.5 w-20">Saldo</th>
                   <th className="text-center px-0.5 w-18">Status</th>
                 </tr>

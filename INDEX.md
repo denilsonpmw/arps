@@ -1,6 +1,6 @@
-<!-- ARPS-SUPEL - Sistema de Controle de Adesões a Atas de Registro de Preços -->
+<!-- ARP's-SUPEL - Sistema de Controle de Adesões a Atas de Registro de Preços -->
 
-# 🏛️ ARPS-SUPEL
+# 🏛️ ARP's-SUPEL
 
 ## Sistema Web de Controle de Adesões a Atas de Registro de Preços
 

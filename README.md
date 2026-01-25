@@ -1,4 +1,4 @@
-# ARPS-SUPEL - Sistema de Controle de Adesões a Atas de Registro de Preços
+# ARP's-SUPEL - Sistema de Controle de Adesões a Atas de Registro de Preços
 
 Sistema web para gerenciar adesões a atas de registro de preços de acordo com a Lei 14.133/2021.
 

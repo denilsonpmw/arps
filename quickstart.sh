@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# ARPS-SUPEL - Quick Start Script
+# ARP's-SUPEL - Quick Start Script
 # Execute este script para setup inicial rápido
 
 echo "==============================================="
-echo "ARPS-SUPEL - Sistema de Controle de Adesões"
+echo "ARP's-SUPEL - Sistema de Controle de Adesões"
 echo "==============================================="
 echo ""
 

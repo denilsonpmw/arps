@@ -33,7 +33,7 @@ export default function Login() {
             <div className="bg-blue-100 dark:bg-blue-900/30 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
               <LogIn size={32} className="text-blue-600 dark:text-blue-400" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">ARPS-SUPEL</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">ARP's-SUPEL</h1>
             <p className="text-gray-600 dark:text-gray-300 mt-2">Sistema de Controle de Adesões</p>
           </div>
 
